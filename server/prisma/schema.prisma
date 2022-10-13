@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  nombre    String
+  rol       Rol      @relation(fields: [rolId], references: [id])
+  rolId     Int
+  password  String
+  direccion String
+  odenes    Pedido[]
+  restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
+  restauranteId Int
+}
+
+model Cliente {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  nombre      String
+  apellido1   String
+  apellido2   String
+  descripcion String
+  direccion   String
+  odenes      Pedido[]
+}
+
+model Pedido {
+  id         Int                 @id @default(autoincrement())
+  fechaPedido DateTime            @default(now())
+  usuario    Usuario             @relation(fields: [usuarioId], references: [id])
+  usuarioId  Int
+  Cliente    Cliente             @relation(fields: [clienteId], references: [id])
+  clienteId  Int
+  platillos  PedidoOnPlatillos[]
+  mesa       Mesa                @relation(fields: [mesaId], references: [id])
+  mesaId     String
+  factura    Factura?
+  comentarios String
+  descuento  Int @default(0)
+}
+
+model Platillo {
+  id          Int                 @id @default(autoincrement())
+  categoria   Categoria           @relation(fields: [categoriaId], references: [id])
+  categoriaId Int        
+  descripcion String
+  estado      Boolean             @default(true)
+  precio      Decimal             @db.Decimal(10, 2)
+  createdAt   DateTime            @default(now())
+  pedidos     PedidoOnPlatillos[]
+  restaurantes Restaurante[]
+}
+
+model PedidoOnPlatillos {
+  pedido     Pedido   @relation(fields: [pedidoId], references: [id])
+  pedidoId   Int
+  platillo   Platillo @relation(fields: [platilloId], references: [id])
+  platilloId Int
+  cantidad   Int
+  total      Decimal             @db.Decimal(10, 2)
+  @@id([pedidoId, platilloId])
+}
+
+model Mesa {
+  id        String      @id
+  capacidad Int
+  pedidos Pedido[]
+  restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
+  restauranteId Int
+}
+
+model Rol {
+  id          Int       @id @default(autoincrement())
+  descripcion String
+  usuarios    Usuario[]
+}
+
+model Restaurante {
+  id        Int    @id @default(autoincrement())
+  nombre    String
+  direccion String
+  telefono  String
+  mesas Mesa[]
+  usuarios Usuario[]
+  platillos Platillo[]
+}
+
+model Categoria {
+  id          Int        @id @default(autoincrement())
+  descripcion String
+  platillos   Platillo[]
+}
+
+model Factura {
+  id       Int    @id @default(autoincrement())
+  pedidoId Int    @unique
+  Pedido   Pedido  @relation(fields: [pedidoId], references: [id])
+  impuesto Int
+  total Int
+  tarjeta      Boolean             @default(false)
+}
