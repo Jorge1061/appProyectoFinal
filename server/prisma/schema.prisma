@@ -43,22 +43,33 @@ model Pedido {
   clienteId  Int
   platillos  PedidoOnPlatillos[]
   mesa       Mesa                @relation(fields: [mesaId], references: [id])
-  mesaId     String
+  mesaId     Int
+  estado     EstadoPedido         @relation(fields: [estadoId], references: [id])
+  estadoId   Int
   factura    Factura?
   comentarios String
   descuento  Int @default(0)
 }
 
+model EstadoPedido{
+  id         Int                 @id @default(autoincrement())
+  descripcion String
+  pedidos     Pedido[]
+}
+
 model Platillo {
   id          Int                 @id @default(autoincrement())
   categoria   Categoria           @relation(fields: [categoriaId], references: [id])
-  categoriaId Int        
+  categoriaId Int  
+  nombre String      
   descripcion String
   estado      Boolean             @default(true)
   precio      Decimal             @db.Decimal(10, 2)
   createdAt   DateTime            @default(now())
+  ingredientes Ingrediente[]
   pedidos     PedidoOnPlatillos[]
   restaurantes Restaurante[]
+  publicar Boolean
 }
 
 model PedidoOnPlatillos {
@@ -72,8 +83,10 @@ model PedidoOnPlatillos {
 }
 
 model Mesa {
-  id        String      @id
+  id        Int       @id @default(autoincrement())
+  codigo String
   capacidad Int
+  estado Boolean
   pedidos Pedido[]
   restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
   restauranteId Int
@@ -83,6 +96,12 @@ model Rol {
   id          Int       @id @default(autoincrement())
   descripcion String
   usuarios    Usuario[]
+}
+
+model Ingrediente {
+  id          Int       @id @default(autoincrement())
+  descripcion String
+  platillos    Platillo[]
 }
 
 model Restaurante {
@@ -105,7 +124,14 @@ model Factura {
   id       Int    @id @default(autoincrement())
   pedidoId Int    @unique
   Pedido   Pedido  @relation(fields: [pedidoId], references: [id])
+  opcionPago     OpcionPago         @relation(fields: [opcionPagoId], references: [id])
+  opcionPagoId   Int
   impuesto Int
   total Int
-  tarjeta      Boolean             @default(false)
+}
+
+model OpcionPago{
+  id          Int                 @id @default(autoincrement())
+  descripcion String
+  facturas    Factura[]
 }
