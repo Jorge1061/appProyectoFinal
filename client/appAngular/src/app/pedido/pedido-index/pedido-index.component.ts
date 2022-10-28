@@ -5,7 +5,6 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PedidoModule } from '../pedido.module';
 
 @Component({
   selector: 'pedido-index',
@@ -46,12 +45,10 @@ export class PedidoIndexComponent implements AfterViewInit {
   }
 
   verPedido(id: number) {
-    for(let item in this.listaPedidos){
-      this.router.navigate(['/platillo/', id], {
-        relativeTo: this.route,
-      });
+    this.router.navigate(['/pedido/', id], {
+      relativeTo: this.route,
+    });
   }
-}
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();

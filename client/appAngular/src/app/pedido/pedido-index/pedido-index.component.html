@@ -30,7 +30,7 @@
           <!-- Columna precio -->
           <ng-container matColumnDef="tipo">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
-            <td mat-cell *matCellDef="let row">{{ row.rolI}}</td>
+            <td mat-cell *matCellDef="let row">{{ row.usuario.rolId}}</td>
           </ng-container>
           
           <ng-container matColumnDef="ver">

@@ -18,7 +18,7 @@
               <br><br>
               <h2>Productos de la comanda</h2>
               <ul *ngIf="pedidoInfo.platillos">
-                <li *ngIf="isAutenticated" *ngFor="let item of pedidoInfo.platillos"> Platillo: {{item.nombre}} Precio: {{item.precio}} / 
+                <li *ngFor="let item of pedidoInfo.platillos"> Platillo: {{item.nombre}} Precio: {{item.precio}} / 
                    Cantidad: {{item.cantidad}}  /  Notas: {{item.descripcion}} </li>
              </ul>
 

@@ -10,7 +10,7 @@ import { GenericService } from 'src/app/share/generic.service';
   styleUrls: ['./pedido-detail.component.css']
 })
 export class PedidoDetailComponent implements OnInit{
-  isAutenticated: boolean | undefined;
+
   destroy$: Subject<boolean> = new Subject<boolean>();
   pedidoInfo:any;
   idPedido: number = 0;
@@ -19,12 +19,10 @@ export class PedidoDetailComponent implements OnInit{
     private router: Router,private activeRouter: ActivatedRoute) {
   }
   ngOnInit(): void {
-
     //Verificar si se envio un id por parametro para crear formulario para actualizar
     this.activeRouter.params.subscribe((params:Params)=>{
-      
       this.idPedido=params['id'];
-      if(this.idPedido!=undefined && this.isAutenticated==true){
+      if(this.idPedido!=undefined){
          //Obtener Pedido a actualizar del API
          this.gService.get('pedido',this.idPedido).pipe(takeUntil(this.destroy$))
          .subscribe((data:any)=>{
@@ -36,9 +34,6 @@ export class PedidoDetailComponent implements OnInit{
   }
   onBack() {
     this.router.navigate(['/pedido']);
-  }
-  esPlatillo(){
-
   }
 
 }
