@@ -7,7 +7,17 @@ module.exports.get = async (request, response, next) => {
       fechaPedido: 'asc', 
     },
     include: {
-      usuario:true
+      usuario:{
+        select: {
+          id: true,
+          email: true,
+          nombre: true,
+          password: true,
+          direccion: true,
+          restauranteId: true,
+          rol: true,
+        },
+      },
     },
   });
   response.json(pedido);
@@ -26,7 +36,7 @@ module.exports.getById = async (request, response, next) => {
           cantidad: true,
         },
       },
-      usuario:true,
+      usuario: true,
       mesa:{
         select:{
           restaurante:true,
