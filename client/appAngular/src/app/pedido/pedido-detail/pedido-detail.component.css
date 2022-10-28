@@ -2,11 +2,13 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
-  background-size: 100%;
   background-image: url("/assets/images/fondo.jpeg");
   background-repeat: no-repeat;
+  background-size: 100%;
 }
-
+.abajo{
+  height: 100px;
+}
 table {
   width: 100%;
 }
@@ -20,11 +22,12 @@ td {
 .container {
   color: green;
   width: 1000px;
+
 }
 
 .space {
   background-color: white;
-  height: auto;
+
 }
 
 .info {

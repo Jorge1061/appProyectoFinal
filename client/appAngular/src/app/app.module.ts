@@ -24,6 +24,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule} from "@angular/material/dialog";
 import { MesaModule } from './mesa/mesa.module';
 import { PlatilloModule} from './platillo/platillo.module';
+import { PedidoModule} from './pedido/pedido.module';
 
 
 @NgModule({ 
@@ -38,6 +39,7 @@ import { PlatilloModule} from './platillo/platillo.module';
     HomeModule,
     MesaModule,
     PlatilloModule,
+    PedidoModule,
     UserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -53,7 +55,7 @@ import { PlatilloModule} from './platillo/platillo.module';
     MatPaginatorModule,
     MatSortModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
