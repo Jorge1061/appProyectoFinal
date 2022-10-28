@@ -1,7 +1,8 @@
 body {
     height: 100%;
     background-image: url("/assets/images/fondo.jpeg");
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
+    background-size: 100%;
   }
 
   div{
