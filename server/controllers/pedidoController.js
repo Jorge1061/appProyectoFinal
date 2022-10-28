@@ -19,13 +19,21 @@ module.exports.getById = async (request, response, next) => {
       id: id,
     },
     include: {
+      cliente:true,
       platillos: {
         select: {
           platillo: true,
           cantidad: true,
         },
       },
-      usuario:true
+      usuario:true,
+      mesa:{
+        select:{
+          restaurante:true,
+          capacidad:true,
+          codigo:true
+        }
+      }
     },
   });
   response.json(pedido);

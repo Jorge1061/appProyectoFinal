@@ -39,19 +39,19 @@ model Pedido {
   fechaPedido DateTime            @default(now())
   usuario    Usuario             @relation(fields: [usuarioId], references: [id])
   usuarioId  Int
-  Cliente    Cliente             @relation(fields: [clienteId], references: [id])
+  cliente    Cliente             @relation(fields: [clienteId], references: [id])
   clienteId  Int
   platillos  PedidoOnPlatillos[]
   mesa       Mesa                @relation(fields: [mesaId], references: [id])
   mesaId     Int
-  estado     EstadoPedido         @relation(fields: [estadoId], references: [id])
+  estado     EstadoPedidos         @relation(fields: [estadoId], references: [id])
   estadoId   Int
   factura    Factura?
   comentarios String
   descuento  Int @default(0)
 }
 
-model EstadoPedido{
+model EstadoPedidos{
   id         Int                 @id @default(autoincrement())
   descripcion String
   pedidos     Pedido[]
@@ -66,11 +66,26 @@ model Platillo {
   estado      Boolean             @default(true)
   precio      Decimal             @db.Decimal(10, 2)
   createdAt   DateTime            @default(now())
-  ingredientes Ingrediente[]
+  ingredientes PlatillosOnIngredientes[]
   pedidos     PedidoOnPlatillos[]
   restaurantes Restaurante[]
-  publicar Boolean
 }
+
+model Ingrediente {
+  id          Int       @id @default(autoincrement())
+  descripcion String
+  platillos    PlatillosOnIngredientes[]
+}
+
+model PlatillosOnIngredientes {
+  platillo     Platillo   @relation(fields: [platilloId], references: [id])
+  platilloId   Int
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+  ingredienteId Int
+  cantidad   String
+  
+  @@id([platilloId, ingredienteId])
+} 
 
 model PedidoOnPlatillos {
   pedido     Pedido   @relation(fields: [pedidoId], references: [id])
@@ -86,10 +101,17 @@ model Mesa {
   id        Int       @id @default(autoincrement())
   codigo String
   capacidad Int
-  estado Boolean
   pedidos Pedido[]
   restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
   restauranteId Int
+  estado     EstadoMesas         @relation(fields: [estadoId], references: [id])
+  estadoId Int
+}
+
+model EstadoMesas{
+  id          Int                 @id @default(autoincrement())
+  descripcion String
+  mesas       Mesa[]
 }
 
 model Rol {
@@ -98,11 +120,7 @@ model Rol {
   usuarios    Usuario[]
 }
 
-model Ingrediente {
-  id          Int       @id @default(autoincrement())
-  descripcion String
-  platillos    Platillo[]
-}
+
 
 model Restaurante {
   id        Int    @id @default(autoincrement())
@@ -123,7 +141,7 @@ model Categoria {
 model Factura {
   id       Int    @id @default(autoincrement())
   pedidoId Int    @unique
-  Pedido   Pedido  @relation(fields: [pedidoId], references: [id])
+  pedido   Pedido  @relation(fields: [pedidoId], references: [id])
   opcionPago     OpcionPago         @relation(fields: [opcionPagoId], references: [id])
   opcionPagoId   Int
   impuesto Int

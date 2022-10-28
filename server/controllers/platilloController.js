@@ -7,6 +7,12 @@ module.exports.get = async (request, response, next) => {
     orderBy: {
       nombre: 'asc',
     },
+    include:{
+      categoria: true,
+      restaurantes: {
+        select:{nombre:true}
+      },
+    }
   });
   response.json(platillos);
 }; 
@@ -18,7 +24,13 @@ module.exports.getById = async (request, response, next) => {
     where: { id: id },
     include: {
       categoria: true,
-      ingredientes:true,
+      ingredientes:{
+        select:{
+          ingrediente:true,
+          cantidad:true
+        }
+      },
+      restaurantes:true
     },
   });
   response.json(platillo);
@@ -83,6 +95,11 @@ module.exports.update = async (request, response, next) => {
         //categorias tiene que ser {id:valor}
         disconnect:platilloViejo.ingredientes,
         connect: platillo.ingredientes,
+      },
+      restaurantes: {
+        //categorias tiene que ser {id:valor}
+        disconnect:platilloViejo.restaurantes,
+        connect: platillo.restaurantes,
       },
     },
   });

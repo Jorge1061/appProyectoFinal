@@ -7,6 +7,9 @@ module.exports.get = async (request, response, next) => {
     orderBy: {
       codigo: "asc",
     },
+    include: {
+      estado: true
+    }
   });
   response.json(mesas);
 };
@@ -15,6 +18,10 @@ module.exports.getById = async (request, response, next) => {
   const mesa = await prisma.mesa.findUnique({
     where: {
       id: id,
+    },
+    include: {
+      estado: true,
+      restaurante:true
     }
   });
   response.json(mesa);
