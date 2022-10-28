@@ -20,7 +20,7 @@
               <br>
               <p>Categoría: {{platilloInfo.categoria.descripcion}}</p>
               <br>
-              <p>Ingredientes: {{platilloInfo.categoria.descripcion}}</p>
+              <h2>Ingredientes:</h2>
               
               <ul *ngIf="platilloInfo.ingredientes">
                 <li *ngFor="let item of platilloInfo.ingredientes"> {{item.cantidad}} {{item.ingrediente.descripcion}}</li>

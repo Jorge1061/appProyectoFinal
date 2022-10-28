@@ -49,6 +49,7 @@ model Pedido {
   factura    Factura?
   comentarios String
   descuento  Int @default(0)
+  total Int
 }
 
 model EstadoPedidos{
@@ -83,7 +84,6 @@ model PlatillosOnIngredientes {
   ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
   ingredienteId Int
   cantidad   String
-  
   @@id([platilloId, ingredienteId])
 } 
 

@@ -40,4 +40,7 @@ export class MesaIndexComponent {
       relativeTo: this.route,
     });
   }
+  onBack() {
+    this.router.navigate(['/']);
+  }
 }

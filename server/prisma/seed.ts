@@ -290,7 +290,7 @@ async function main() {
     data: {
       nombre:'Gelato',
       descripcion:'Uno de los postres tradicionales en toda Italia es el gelato (helado típico italiano), Está elaborado con una base de 3,25% de grasa láctea, leche entera y azúcar, pudiendo incluir frutas, frutos secos, chocolate, huevos, café, u otros ingredientes frescos en función del sabor específico que se desea obtener',
-      precio:1000,
+      precio:2000,
       categoria : {
         connect:{
           id:4
@@ -317,7 +317,7 @@ async function main() {
     data: {
       nombre:'Margherita',
       descripcion:'No hay mucho que decir. Es la reina de la mesa. Ya sea en su simple versión con mozzarella fiordilatte o mozzarella de bufala (en este caso se llamará BUFALINA), la pizza margherita es sin duda la pizza preferida por los italianos.Además de la mozzarella, los otros ingredientes son tomate, aceite y albahaca, combinados de forma artesanal por los pizzeros (pizzaioli) italianos.',
-      precio:1000,
+      precio:8000,
       categoria : {
         connect:{
           id:3
@@ -623,7 +623,7 @@ async function main() {
         createMany: {
           data: [
             { cantidad: 2, total:2000, platilloId: 1 },
-            { cantidad: 3, total:8000, platilloId: 2 }
+            { cantidad: 8, total:8000, platilloId: 2 }
           ]
         }
       },
@@ -638,7 +638,8 @@ async function main() {
         }
       },
       comentarios:'Sin albondigas',
-      descuento:15
+      descuento:15,
+      total:10000
     }
   });
 
@@ -658,8 +659,8 @@ async function main() {
       platillos : {
         createMany: {
           data: [
-            { cantidad: 3, total:8000, platilloId: 2 },
-            { cantidad: 1, total:16000, platilloId: 3 }
+            { cantidad: 4, total:8000, platilloId: 2 },
+            { cantidad: 2, total:16000, platilloId: 3 }
           ]
         }
       },
@@ -674,7 +675,8 @@ async function main() {
         }
       },
       comentarios:'Sin queso',
-      descuento:1
+      descuento:1,
+      total:24000
     }
   });
 

@@ -20,7 +20,7 @@ export class PedidoIndexComponent implements AfterViewInit {
   dataSource= new MatTableDataSource<any>();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fecha', 'correo',"nombre" ,"tipo","ver"];
+  displayedColumns = ['fecha',"nombre" ,"tipo", 'estado','subtotal',"ver"];
 
   constructor(private router: Router,
     private route: ActivatedRoute,private gService:GenericService) {
@@ -48,6 +48,9 @@ export class PedidoIndexComponent implements AfterViewInit {
     this.router.navigate(['/pedido/', id], {
       relativeTo: this.route,
     });
+  }
+  onBack() {
+    this.router.navigate(['/']);
   }
   ngOnDestroy(){
     this.destroy$.next(true);

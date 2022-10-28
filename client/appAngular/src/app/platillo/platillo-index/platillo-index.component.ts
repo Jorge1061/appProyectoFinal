@@ -49,6 +49,9 @@ export class PlatilloIndexComponent implements AfterViewInit {
       relativeTo: this.route,
     });
   }
+  onBack() {
+    this.router.navigate(['/']);
+  }
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();

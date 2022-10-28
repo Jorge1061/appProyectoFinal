@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject,takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
@@ -11,10 +14,14 @@ import { GenericService } from 'src/app/share/generic.service';
 })
 export class PedidoDetailComponent implements OnInit{
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  destroy$:Subject<boolean>= new Subject<boolean>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   pedidoInfo:any;
   idPedido: number = 0;
-
+  dataSource= new MatTableDataSource<any>();
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['platillo',"cantidad" ,"precio",'subtotal'];
   constructor(private fb: FormBuilder, private gService: GenericService,
     private router: Router,private activeRouter: ActivatedRoute) {
   }
@@ -27,7 +34,9 @@ export class PedidoDetailComponent implements OnInit{
          this.gService.get('pedido',this.idPedido).pipe(takeUntil(this.destroy$))
          .subscribe((data:any)=>{
           this.pedidoInfo=data;
-          
+          this.dataSource= new MatTableDataSource(data.platillos);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
          });
       }
     });

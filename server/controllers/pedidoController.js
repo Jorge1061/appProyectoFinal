@@ -7,6 +7,7 @@ module.exports.get = async (request, response, next) => {
       fechaPedido: 'asc', 
     },
     include: {
+      estado:true,
       usuario:{
         select: {
           id: true,
@@ -34,9 +35,16 @@ module.exports.getById = async (request, response, next) => {
         select: {
           platillo: true,
           cantidad: true,
+          total:true,
         },
       },
-      usuario: true,
+      usuario: {
+        select:{
+          nombre:true,
+          rol:true
+        }
+      },
+      estado:true,
       mesa:{
         select:{
           restaurante:true,

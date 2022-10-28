@@ -1,7 +1,16 @@
 <mat-card class="full-width">
     <!-- Title of an Card -->
-
+    <br>
+    
     <mat-card-content>
+      <div class="mat-p">
+        <button class="return" mat-mini-fab color="accent" matTooltip="Volver" aria-label="Volver" color="primary" (click)="onBack()">
+          <mat-icon class="mat-18">arrow_left_alt</mat-icon>
+        </button>
+        </div>
+          <h1 class="mat-p">
+              Información de platillos
+          </h1>
       <div class="mat-elevation-z8"   
       *ngIf="dataSource"
      

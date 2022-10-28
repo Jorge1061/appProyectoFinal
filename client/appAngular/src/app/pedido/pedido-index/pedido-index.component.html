@@ -2,6 +2,14 @@
     <!-- Title of an Card -->
 
     <mat-card-content>
+      <div class="mat-p">
+        <button class="return" mat-mini-fab color="accent" matTooltip="Volver" aria-label="Volver" color="primary" (click)="onBack()">
+          <mat-icon class="mat-18">arrow_left_alt</mat-icon>
+        </button>
+        </div>
+          <h1 class="mat-p">
+              Información de pedidos
+          </h1>
       <div class="mat-elevation-z8"   
       *ngIf="dataSource"
      
@@ -12,18 +20,14 @@
           <!-- Columna nombre -->
           <ng-container matColumnDef="fecha">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha del pedido</th>
-            <td mat-cell *matCellDef="let row">{{ row.fechaPedido }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.fechaPedido | date: "dd/MM/yyyy" }}</td>
           </ng-container>
   
-          <!-- Columna precio -->
-          <ng-container matColumnDef="correo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo Usuario</th>
-            <td mat-cell *matCellDef="let row">{{ row.usuario.email }}</td>
-          </ng-container>
+
           
           <!-- Columna precio -->
           <ng-container matColumnDef="nombre">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
             <td mat-cell *matCellDef="let row">{{ row.usuario.nombre }}</td>
           </ng-container>
           
@@ -33,6 +37,17 @@
             <td mat-cell *matCellDef="let row">{{ row.usuario.rol.descripcion}}</td>
           </ng-container>
           
+          <!-- Columna precio -->
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">{{ row.estado.descripcion}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="subtotal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Subtotal</th>
+            <td mat-cell *matCellDef="let row">{{ row.total}}</td>
+          </ng-container>
+
           <ng-container matColumnDef="ver">
             <th mat-header-cell *matHeaderCellDef class="ver">Ver</th>
             <td mat-cell *matCellDef="let row">

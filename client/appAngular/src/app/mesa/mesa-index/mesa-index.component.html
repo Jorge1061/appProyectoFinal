@@ -2,14 +2,20 @@
     
     <div class="grid-container">
         <br>
-        <h1 class="mat-p">
-            Control de Mesas
-        </h1>
+        <div class="mat-p">
+            <button class="return" mat-mini-fab color="accent" matTooltip="Volver" aria-label="Volver" color="primary" (click)="onBack()">
+              <mat-icon class="mat-18">arrow_left_alt</mat-icon>
+            </button>
+            </div>
+              <h1 class="mat-p">
+                  Control de mesas
+              </h1>
         <mat-grid-list [cols]="3" rowHeight="12em" gutterSize="10px" *ngIf="datos">
+            
             <mat-grid-tile *ngFor="let item of datos">
                 <mat-card class="dashboard-card">
                     <mat-card-header>
-                        <mat-card-title>
+                        <mat-card-title style="color:#b32428">
                             {{item.codigo }}
 
                         </mat-card-title>

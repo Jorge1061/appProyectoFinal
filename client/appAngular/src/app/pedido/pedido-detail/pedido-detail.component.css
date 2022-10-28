@@ -1,10 +1,10 @@
 body {
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: auto;
   background-image: url("/assets/images/fondo.jpeg");
-  background-repeat: no-repeat;
-  background-size: 100%;
+  background-repeat: repeat-y;
+
 }
 .abajo{
   height: 100px;
@@ -14,7 +14,34 @@ table {
 }
 
 
+mat-table{
+  background-color: white;
+  border:solid 1px #b32428;
+}
 
+mat-cell{
+  color:green;
+  
+}
+mat-header-cell{
+  color:green;
+  font-weight:800;
+  border-bottom:solid 1px #b32428;
+}
+mat-footer-cell{
+  color:green;
+  font-weight:800;
+
+}
+mat-footer-cell{
+  border-top:solid 1px #b32428;
+}
+.center{
+  text-align: center;
+}
+.abajo{
+  height: 100px;
+}
 td {
   width: 50%;
 }
@@ -45,12 +72,16 @@ h1{
 
   text-align: center;
  
-  -webkit-text-stroke: 2px red;
+  -webkit-text-stroke: 2px #b32428;
   color: white;
   font-weight: 900;
   font-family: Arial, Helvetica, sans-serif;
   font-size: xx-large;
   
+}
+
+h2{
+  color:#b32428
 }
 
 mat-icon {
