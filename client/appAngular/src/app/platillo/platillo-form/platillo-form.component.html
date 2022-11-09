@@ -13,7 +13,7 @@
       <mat-icon class="mat-18">arrow_left_alt</mat-icon>
     </button>
   </div>
-  <h1 class="mat-p">Añadir / Actualizar platillo</h1>
+  <h1 class="mat-p">{{titleForm}} Platillo</h1>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <form [formGroup]="platilloForm" novalidate (ngSubmit)="isCreate ? crearPlatillo(): actualizarPlatillo()">
   <input type="hidden" formControlName="id" />
@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput #nombrePlatillo maxlength="20" placeholder="Nombre" formControlName="nombre" pattern="[Aa-Zz]{1,15}">
+            <input matInput #nombrePlatillo maxlength="20" placeholder="Nombre" formControlName="nombre">
             <mat-hint align="end">{{nombrePlatillo.value.length}} / 20</mat-hint>
             <mat-error *ngIf="platilloForm.controls['nombre'].hasError('required')" >
               Nombre es <strong>requerido</strong>
@@ -59,12 +59,12 @@
       <div class="row">
         <div class="col" *ngIf="categoriasList">
           <mat-form-field class="full-width">
-            <mat-select placeholder="Categorias" formControlName="categorias">
+            <mat-select placeholder="Categorias" formControlName="categoriaId">
               <mat-option *ngFor="let g of categoriasList" [value]="g.id">
                 {{ g.descripcion }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="platilloForm.controls['categorias'].hasError('required')">
+            <mat-error *ngIf="platilloForm.controls['categoriaId'].hasError('required')">
               Categorias es <strong>requerido</strong>
             </mat-error>
           </mat-form-field>
@@ -73,7 +73,7 @@
       <div class="row">
         <div class="col" *ngIf="restaurantesList">
           <mat-form-field class="full-width">
-            <mat-select placeholder="Restaurantes" formControlName="restaurantes">
+            <mat-select placeholder="Restaurantes" formControlName="restaurantes" multiple>
               <mat-option *ngFor="let g of restaurantesList" [value]="g.id">
                 {{ g.nombre }}
               </mat-option>
@@ -85,10 +85,10 @@
         </div>
       </div>
       
-      <div class="row">
+      <!-- <div class="row">
         <div class="col" *ngIf="ingredientesList">
           <mat-form-field class="full-width">
-            <mat-select placeholder="Ingredientes" formControlName="ingredientes">
+            <mat-select placeholder="Ingredientes" formControlName="ingredientes" multiple>
               <mat-option *ngFor="let g of ingredientesList" [value]="g.id">
                 {{ g.descripcion }}
               </mat-option>
@@ -98,7 +98,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-      </div>
+      </div> -->
       
       <div class="row">
         <div class="col">

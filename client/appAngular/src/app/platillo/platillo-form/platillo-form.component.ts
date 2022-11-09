@@ -43,13 +43,16 @@ export class PlatilloFormComponent implements OnInit{
           this.platilloInfo=data;
           this.platilloForm.setValue({
             id:this.platilloInfo.id,
+            
             nombre:this.platilloInfo.nombre,
-            descripcion:this.platilloInfo.descripcion,
             precio:this.platilloInfo.precio,
-            publicar:this.platilloInfo.publicar,
-            categorias:this.platilloInfo.categorias.map(({id}) => id),
-            ingredientes:this.platilloInfo.ingredientes.map(({id}) => id),
-            restaurantes:this.platilloInfo.restaurantes.map(({id}) => id)
+            publicar:this.platilloInfo.estado,
+            categoriaId:this.platilloInfo.categoria.id,
+            
+            descripcion:this.platilloInfo.descripcion,
+            restaurantes:this.platilloInfo.restaurantes.map(({id}) => id),
+            
+            //ingredientes:this.platilloInfo.ingredientes.map(({id}) => id),
           })
          });
       }
@@ -68,12 +71,11 @@ export class PlatilloFormComponent implements OnInit{
         Validators.required, Validators.minLength(2),Validators.maxLength(20),
         Validators.pattern(/^[a-zA-Z ]+$/),
       ])],
-      descripcion:[null, Validators.required, 
-        Validators.pattern(/^[a-zA-Z ]+$/)],
+      descripcion:[null, Validators.compose([Validators.required, 
+        Validators.pattern(/^[a-zA-Z ]+$/)])],
       precio: [null, Validators.required],
       publicar:[true, Validators.required],
-      categorias:[null, Validators.required],
-      ingredientes:[null, Validators.required],
+      categoriaId:[null, Validators.required],
       restaurantes:[null, Validators.required]
     });
    
@@ -161,17 +163,13 @@ export class PlatilloFormComponent implements OnInit{
       return;
     }
     
-    //Obtener id Categorias del Formulario y Crear arreglo con {id: value}
-    let gFormat:any=this.platilloForm.get('categorias').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario 
-    this.platilloForm.patchValue({ categorias:gFormat});
-    console.log(this.platilloForm.value);
 
-    //Obtener id Ingredientes del Formulario y Crear arreglo con {id: value}
+
+  /*   //Obtener id Ingredientes del Formulario y Crear arreglo con {id: value}
     let gFormat2:any=this.platilloForm.get('ingredientes').value.map(x=>({['id']: x }));
     //Asignar valor al formulario 
     this.platilloForm.patchValue({ ingredientes:gFormat2});
-    console.log(this.platilloForm.value);
+    console.log(this.platilloForm.value); */
 
     //Obtener id Restaurantes del Formulario y Crear arreglo con {id: value}
     let gFormat3:any=this.platilloForm.get('restaurantes').value.map(x=>({['id']: x }));

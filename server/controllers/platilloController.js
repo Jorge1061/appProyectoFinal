@@ -44,7 +44,7 @@ module.exports.create = async (request, response, next) => {
       nombre: platillo.nombre,
       descripcion: platillo.descripcion,
       precio: platillo.precio,
-      publicar: platillo.publicar,
+      estado: platillo.publicar,
       categoria: {
         //categorias tiene que ser {id:valor}
         connect: platillo.categoria,
@@ -89,14 +89,21 @@ module.exports.update = async (request, response, next) => {
       publicar: platillo.publicar,
       categoria: {
         //categorias tiene que ser {id:valor}
-        disconnect:platilloViejo.categoria,
-        connect: platillo.categoria,
+        connect: await prisma.categoria.findUnique({
+          where: {
+            id: platillo.categoriaId,
+          },
+          select:
+          {
+            id:true
+          }
+        })
       },
-      ingredientes: {
+      /* ingredientes: {
         //categorias tiene que ser {id:valor}
         disconnect:platilloViejo.ingredientes,
         connect: platillo.ingredientes,
-      },
+      }, */
       restaurantes: {
         //categorias tiene que ser {id:valor}
         disconnect:platilloViejo.restaurantes,
