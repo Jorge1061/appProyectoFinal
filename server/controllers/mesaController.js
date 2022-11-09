@@ -39,14 +39,32 @@ module.exports.create = async (request, response, next) => {
   let mesa = request.body;
   const newmesa = await prisma.mesa.create({
     data: {
-      nombre: mesa.codigo,
-      capacidad: mesa.capacidad,
-      estado: {
-       connect: mesa.estado,
-      },
-      restaurantes: {
-        //categorias tiene que ser {id:valor}
-        connect: mesa.restaurantes,
+      codigo: mesa.codigo,
+      capacidad: parseInt(mesa.capacidad),
+      estado:{
+        connect:
+          await prisma.estadoMesas.findUnique({
+            where: {
+              id: mesa.estadoId,
+            },
+            select:
+            {
+              id:true
+            }
+          })
+        
+      } ,
+      restaurante: {
+        connect:
+        await prisma.restaurante.findUnique({
+          where: {
+            id: mesa.restauranteId,
+          },
+          select:
+          {
+            id:true
+          }
+        })
       },
     },
   });
@@ -65,31 +83,48 @@ module.exports.update = async (request, response, next) => {
           id:true
         }
       },
-      restaurantes: {
+      restaurante: {
         select:{
           id:true
         }
       }
     }
+  
   });
+
 
   const newmesa = await prisma.mesa.update({
     where: {
       id: idmesa,
     },
     data: {
-      nombre: mesa.codigo,
-      capacidad: mesa.capacidad,
-      estado: {
-        //categorias tiene que ser {id:valor}
-        disconnect:mesaViejo.restaurantes,
-        connect: mesa.restaurantes,
-      },
-      restaurantes: {
-        //categorias tiene que ser {id:valor}
-        disconnect:mesaViejo.restaurantes,
-        connect: mesa.restaurantes,
-      },
+      codigo: mesa.codigo,
+      capacidad: parseInt(mesa.capacidad),
+      estado:{
+        connect:
+          await prisma.estadoMesas.findUnique({
+            where: {
+              id: mesa.estadoId,
+            },
+            select:
+            {
+              id:true
+            }
+          })
+        
+      } ,
+      restaurante: {
+        connect:
+        await prisma.restaurante.findUnique({
+          where: {
+            id: mesa.restauranteId,
+          },
+          select:
+          {
+            id:true
+          }
+        })
+      }
     },
   });
   response.json(newmesa);
