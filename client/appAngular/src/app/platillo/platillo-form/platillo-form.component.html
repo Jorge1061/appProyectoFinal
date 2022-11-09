@@ -100,9 +100,12 @@
         </div>
       </div> -->
       
-      <div class="row">
+
+        <div class="row-abajo">
+
         <div class="col">
-          <mat-label>Publicar</mat-label>
+
+          <mat-label class = "publicar">Publicar</mat-label>
           <mat-radio-group formControlName="publicar">
             <mat-radio-button [value]="true">Sí</mat-radio-button>
             <mat-radio-button [value]="false">No</mat-radio-button>
@@ -111,12 +114,14 @@
           platilloForm.controls['publicar'].hasError('required')">
             Publicar es <strong>requerido</strong>
           </mat-error>
+
         </div>
-      </div>
-    </mat-card-content>
+    
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit">Guardar</button>
     </mat-card-actions>
+  </div>
+</mat-card-content>
   </mat-card>
 </form>
 </body>
