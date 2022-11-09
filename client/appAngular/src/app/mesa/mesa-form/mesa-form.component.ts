@@ -43,8 +43,8 @@ export class MesaFormComponent implements OnInit{
             id:this.mesaInfo.id,
             codigo:this.mesaInfo.codigo,
             capacidad:this.mesaInfo.capacidad,
-            estados:this.mesaInfo.estados.map(({id}) => id),
-            restaurantes:this.mesaInfo.restaurante.map(({id}) => id)
+            estadoId:this.mesaInfo.estado.id,
+            restauranteId:this.mesaInfo.restaurante.id
           })
          });
       }
@@ -53,6 +53,7 @@ export class MesaFormComponent implements OnInit{
    
        
 
+  
   }
   //Crear Formulario
   formularioReactive(){
@@ -63,8 +64,8 @@ export class MesaFormComponent implements OnInit{
         Validators.required, Validators.minLength(2),Validators.maxLength(20)
       ])],
       capacidad:[null, Validators.required],
-      estados:[null, Validators.required],
-      restaurantes:[null, Validators.required]
+      estadoId:[null, Validators.required],
+      restauranteId:[null, Validators.required]
     });
    
   }
@@ -102,18 +103,6 @@ export class MesaFormComponent implements OnInit{
     if(this.mesaForm.invalid){
       return;
     }
-    
-    //Obtener id Mesas del Formulario y Crear arreglo con {id: value}
-    let gFormat:any=this.mesaForm.get('estados').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario 
-    this.mesaForm.patchValue({ estados:gFormat});
-    console.log(this.mesaForm.value);
-
-    //Obtener id Restaurantes del Formulario y Crear arreglo con {id: value}
-    let gFormat3:any=this.mesaForm.get('restaurantes').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario 
-    this.mesaForm.patchValue({ restaurantes:gFormat3});
-    console.log(this.mesaForm.value);
 
     //Accion API create enviando toda la informacion del formulario
     this.gService.create('mesa',this.mesaForm.value)
@@ -133,19 +122,7 @@ export class MesaFormComponent implements OnInit{
     //Verificar validación
     if(this.mesaForm.invalid){
       return;
-    }
-    
-    //Obtener id Mesas del Formulario y Crear arreglo con {id: value}
-    let gFormat:any=this.mesaForm.get('estados').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario 
-    this.mesaForm.patchValue({ estados:gFormat});
-    console.log(this.mesaForm.value);
-
-    //Obtener id Restaurantes del Formulario y Crear arreglo con {id: value}
-    let gFormat3:any=this.mesaForm.get('restaurantes').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario 
-    this.mesaForm.patchValue({ restaurantes:gFormat3});
-    console.log(this.mesaForm.value);
+    } 
     
     //Accion API create enviando toda la informacion del formulario
     this.gService.update('mesa',this.mesaForm.value)
