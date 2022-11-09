@@ -17,10 +17,11 @@
       }
     body {
 
-        background-image: url("/assets/images/fondo.jpeg");
-        background-repeat: repeat-y;
-        height: auto;
-        background-size: 100%;
+        height: 100%;
+  background-size: 100%;
+  background-image: url("/assets/images/fondo.jpeg");
+  background-repeat: no-repeat;
+        
     }
     
     .abajo{
