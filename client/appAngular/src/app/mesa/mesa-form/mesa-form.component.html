@@ -1,0 +1,71 @@
+<body>
+  <br>
+  <div class="mat-p">
+    <button
+      class="return"
+      mat-mini-fab
+      color="accent"
+      matTooltip="Volver"
+      aria-label="Volver"
+      color="primary"
+      (click)="onBack()"
+    >
+      <mat-icon class="mat-18">arrow_left_alt</mat-icon>
+    </button>
+  </div>
+  <h1 class="mat-p">Añadir / Actualizar mesa</h1>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<form [formGroup]="mesaForm" novalidate (ngSubmit)="isCreate ? crearMesa(): actualizarMesa()">
+  <input type="hidden" formControlName="id" />
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput #codigoMesa maxlength="20" placeholder="Codigo" formControlName="codigo">
+            <mat-hint align="end">{{codigoMesa.value.length}} / 20</mat-hint>
+            <mat-error *ngIf="mesaForm.controls['codigo'].hasError('required')">
+              Codigo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="row">
+          <div class="col" *ngIf="estadosList">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Estado" formControlName="estados">
+                <mat-option *ngFor="let g of estadosList" [value]="g.id">
+                  {{ g.descripcion }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="mesaForm.controls['estados'].hasError('required')">
+                Estado es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col" *ngIf="restaurantesList">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Restaurantes" formControlName="restaurantes">
+                <mat-option style="color: #b32428" *ngFor="let g of restaurantesList" [value]="g.id">
+                  {{ g.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="mesaForm.controls['restaurantes'].hasError('required')">
+                Restaurantes es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+      </div>
+    
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
+</body>

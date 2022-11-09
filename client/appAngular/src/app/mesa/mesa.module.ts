@@ -14,17 +14,21 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort'; 
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatDialogModule} from "@angular/material/dialog";
-import { ReactiveFormsModule } from '@angular/forms';
+import { MesaDetailComponent } from './mesa-detail/mesa-detail.component';
+import { MesaAllComponent } from './mesa-all/mesa-all.component';
+import { MesaFormComponent } from './mesa-form/mesa-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
-import { MesaDetailComponent } from './mesa-detail/mesa-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     MesaIndexComponent,
-    MesaDetailComponent
+    MesaAllComponent,
+    MesaDetailComponent,
+    MesaFormComponent
   ],
   imports: [
     CommonModule,

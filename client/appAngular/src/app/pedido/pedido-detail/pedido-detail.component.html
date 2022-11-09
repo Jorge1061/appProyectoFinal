@@ -47,67 +47,63 @@
           <ng-container matColumnDef="platillo">
             <mat-header-cell *matHeaderCellDef> Platillo</mat-header-cell>
             <mat-cell *matCellDef="let row">
-
-                {{ row.platillo.nombre }}
-
+              {{ row.platillo.nombre }}
             </mat-cell>
 
-            <mat-footer-cell *matFooterCellDef><br><br><br><br><br><br><br></mat-footer-cell>
+            <mat-footer-cell *matFooterCellDef
+              ><br /><br /><br /><br /><br /><br /><br
+            /></mat-footer-cell>
           </ng-container>
 
           <!-- Columna precio -->
           <ng-container matColumnDef="cantidad">
             <mat-header-cell *matHeaderCellDef> Cantidad</mat-header-cell>
             <mat-cell *matCellDef="let row">
-
-             {{ row.cantidad }}
-
+              {{ row.cantidad }}
             </mat-cell>
 
-            <mat-footer-cell *matFooterCellDef><br><br><br><br><br><br><br></mat-footer-cell>
+            <mat-footer-cell *matFooterCellDef
+              ><br /><br /><br /><br /><br /><br /><br
+            /></mat-footer-cell>
           </ng-container>
 
           <!-- Columna precio -->
           <ng-container matColumnDef="precio">
             <mat-header-cell *matHeaderCellDef> Precio</mat-header-cell>
-            
+
             <mat-cell *matCellDef="let row">
-
-                {{ row.platillo.precio }}
-
+              {{ row.platillo.precio }}
             </mat-cell>
 
-            <mat-footer-cell *matFooterCellDef><br>Subtotal<br><br>Descuento<br><br>Total<br><br></mat-footer-cell>
+            <mat-footer-cell *matFooterCellDef
+              ><br />Subtotal<br /><br />Descuento<br /><br />Total<br /><br
+            /></mat-footer-cell>
           </ng-container>
 
           <!-- Columna precio -->
           <ng-container matColumnDef="subtotal">
             <mat-header-cell *matHeaderCellDef> Subtotal</mat-header-cell>
-            <mat-cell *matCellDef="let row">
-
-              ₡{{ row.total}}
-
-            </mat-cell>
+            <mat-cell *matCellDef="let row"> ₡{{ row.total }} </mat-cell>
 
             <mat-footer-cell *matFooterCellDef>
-              <br>₡{{
-                pedidoInfo.total
-              }}<br><br>₡{{
-              pedidoInfo.descuento/100*pedidoInfo.total
-            }} &nbsp; &nbsp; &nbsp;  ({{pedidoInfo.descuento}}%)<br><br>₡{{
-              pedidoInfo.total*(100-pedidoInfo.descuento)/100
-            }}<br><br></mat-footer-cell>
+              <br />₡{{ pedidoInfo.total }}<br /><br />₡{{
+                (pedidoInfo.descuento / 100) * pedidoInfo.total
+              }}
+              &nbsp; &nbsp; &nbsp; ({{ pedidoInfo.descuento }}%)<br /><br />₡{{
+                (pedidoInfo.total * (100 - pedidoInfo.descuento)) / 100
+              }}<br /><br
+            /></mat-footer-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-      <mat-footer-row
-        *matFooterRowDef="displayedColumns"
-        class="footer-row"
-      ></mat-footer-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          <mat-footer-row
+            *matFooterRowDef="displayedColumns"
+            class="footer-row"
+          ></mat-footer-row>
         </mat-table>
 
         <br /><br />
-        <h2 class="center">***  Notas: {{ pedidoInfo.comentarios }}  ***</h2>
+        <h2 class="center">*** Notas: {{ pedidoInfo.comentarios }} ***</h2>
         <br /><br />
       </div>
     </div>

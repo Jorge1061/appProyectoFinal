@@ -8,11 +8,13 @@ const app = express();
 const prism = new PrismaClient();
 
 //--- Archivos de rutas ---
-
+const restRouter = require("./routes/restauranteRoutes");
+const ingredienteRouter = require("./routes/ingredienteRoutes");
 const generoRouter = require("./routes/categoriaRoutes");
 const platilloRouter = require("./routes/platilloRoutes");
 const pedidoRouter = require("./routes/pedidoRoutes");
 const mesaRouter = require("./routes/mesaRoutes");
+const estadoRouter = require("./routes/estadoRoutes");
 
 // Acceder a la configuracion del archivo .env
 dotEnv.config();
@@ -34,11 +36,13 @@ app.use(
 );
 
 //---- Definir rutas ---- 
-
+app.use("/restaurante/", restRouter);
+app.use("/ingrediente/", ingredienteRouter);
 app.use("/categoria/", generoRouter);
 app.use("/platillo/", platilloRouter);
 app.use("/pedido/", pedidoRouter);
 app.use("/mesa/", mesaRouter);
+app.use("/estado/", estadoRouter);
 
 // Servidor
 app.listen(port, () => {

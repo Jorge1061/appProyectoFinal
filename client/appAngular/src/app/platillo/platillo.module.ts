@@ -14,17 +14,21 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort'; 
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatDialogModule} from "@angular/material/dialog";
-import { ReactiveFormsModule } from '@angular/forms';
+import { PlatilloDetailComponent } from './platillo-detail/platillo-detail.component';
+import { PlatilloAllComponent } from './platillo-all/platillo-all.component';
+import { PlatilloFormComponent } from './platillo-form/platillo-form.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
-import { PlatilloDetailComponent } from './platillo-detail/platillo-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     PlatilloIndexComponent,
-    PlatilloDetailComponent
+    PlatilloAllComponent,
+    PlatilloDetailComponent,
+    PlatilloFormComponent
   ],
   imports: [
     CommonModule,
