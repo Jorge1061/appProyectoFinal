@@ -13,7 +13,7 @@
       <mat-icon class="mat-18">arrow_left_alt</mat-icon>
     </button>
   </div>
-  <h1 class="mat-p">{{titleForm}} Videojuego</h1>
+  <h1 class="mat-p">{{titleForm}} Mesa</h1>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <form [formGroup]="mesaForm" novalidate (ngSubmit)="isCreate ? crearMesa(): actualizarMesa()">
   <input type="hidden" formControlName="id" />
@@ -26,7 +26,16 @@
             <input matInput #codigoMesa maxlength="20" placeholder="Codigo" formControlName="codigo">
             <mat-hint align="end">{{codigoMesa.value.length}} / 20</mat-hint>
             <mat-error *ngIf="mesaForm.controls['codigo'].hasError('required')">
-              Codigo es <strong>requerido</strong>
+              Código es <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="mesaForm.controls['codigo'].hasError('pattern')">
+              Código <strong>no puede tener</strong> caracteres especiales
+            </mat-error>
+            <mat-error *ngIf="mesaForm.controls['codigo'].hasError('minlength')">
+              Código <strong>no puede tener</strong> menos de 2 caracteres
+            </mat-error>
+            <mat-error *ngIf="mesaForm.controls['codigo'].hasError('minlength')">
+              Código <strong>no puede tener</strong> más de 4 caracteres
             </mat-error>
           </mat-form-field>
         </div>
@@ -36,7 +45,12 @@
         <div class="col">
           <mat-form-field class="full-width">
             <input matInput #capacidadMesa maxlength="20" placeholder="Capacidad" formControlName="capacidad">
-
+            <mat-error *ngIf="mesaForm.controls['capacidad'].hasError('required')">
+              Capacidad es <strong>requerida</strong>
+            </mat-error>
+            <mat-error *ngIf="mesaForm.controls['capacidad'].hasError('pattern')">
+              Capacidad debe ser <strong>número positivo</strong>
+            </mat-error>
           </mat-form-field>
         </div>
       </div>

@@ -2,7 +2,9 @@
   width: 100%;
   
 }
-
+:host /deep/ .mat-select-value-text {
+  color: #b32428 !important;
+}
 .mat-raised-button{
   background-color: #b32428;
   padding: 5px 40px;

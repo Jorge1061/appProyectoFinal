@@ -47,12 +47,24 @@ module.exports.create = async (request, response, next) => {
       estado: platillo.publicar,
       categoria: {
         //categorias tiene que ser {id:valor}
-        connect: platillo.categoria,
+        connect: await prisma.categoria.findUnique({
+          where: {
+            id: platillo.categoriaId,
+          },
+          select:
+          {
+            id:true
+          }
+        })
       },
-      ingredientes: {
+      restaurantes:{
+      
+        connect:platillo.restaurantes
+      }
+      /* ingredientes: {
         //categorias tiene que ser {id:valor}
         connect: platillo.ingredientes,
-      },
+      }, */
     },
   });
   response.json(newplatillo);
@@ -70,7 +82,7 @@ module.exports.update = async (request, response, next) => {
           id:true
         }
       },
-      ingredientes: {
+      restaurantes: {
         select:{
           id:true
         }
@@ -86,7 +98,7 @@ module.exports.update = async (request, response, next) => {
       nombre: platillo.nombre,
       descripcion: platillo.descripcion,
       precio: platillo.precio,
-      publicar: platillo.publicar,
+      estado: platillo.publicar,
       categoria: {
         //categorias tiene que ser {id:valor}
         connect: await prisma.categoria.findUnique({
@@ -98,6 +110,10 @@ module.exports.update = async (request, response, next) => {
             id:true
           }
         })
+      },
+      restaurantes:{
+        disconnect:platilloViejo.restaurantes,
+        connect:platillo.restaurantes
       },
       /* ingredientes: {
         //categorias tiene que ser {id:valor}

@@ -69,11 +69,12 @@ export class PlatilloFormComponent implements OnInit{
       id:[null,null],
       nombre:[null,Validators.compose([
         Validators.required, Validators.minLength(2),Validators.maxLength(20),
-        Validators.pattern(/^[a-zA-Z ]+$/),
+        Validators.pattern(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$/),
       ])],
       descripcion:[null, Validators.compose([Validators.required, 
-        Validators.pattern(/^[a-zA-Z ]+$/)])],
-      precio: [null, Validators.required],
+        Validators.minLength(10),Validators.maxLength(999),])],
+      precio: [null, Validators.compose([Validators.required, 
+        Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
       publicar:[true, Validators.required],
       categoriaId:[null, Validators.required],
       restaurantes:[null, Validators.required]
@@ -126,16 +127,16 @@ export class PlatilloFormComponent implements OnInit{
     }
     
     //Obtener id Categorias del Formulario y Crear arreglo con {id: value}
-    let gFormat:any=this.platilloForm.get('categorias').value.map(x=>({['id']: x }));
+    /* let gFormat:any=this.platilloForm.get('categorias').value.map(x=>({['id']: x }));
     //Asignar valor al formulario 
     this.platilloForm.patchValue({ categorias:gFormat});
-    console.log(this.platilloForm.value);
+    console.log(this.platilloForm.value); */
 
     //Obtener id Ingredientes del Formulario y Crear arreglo con {id: value}
-    let gFormat2:any=this.platilloForm.get('ingredientes').value.map(x=>({['id']: x }));
+/*     let gFormat2:any=this.platilloForm.get('ingredientes').value.map(x=>({['id']: x }));
     //Asignar valor al formulario 
     this.platilloForm.patchValue({ ingredientes:gFormat2});
-    console.log(this.platilloForm.value);
+    console.log(this.platilloForm.value); */
 
     //Obtener id Restaurantes del Formulario y Crear arreglo con {id: value}
     let gFormat3:any=this.platilloForm.get('restaurantes').value.map(x=>({['id']: x }));
@@ -148,7 +149,7 @@ export class PlatilloFormComponent implements OnInit{
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
       //Obtener respuesta
       this.respPlatillo=data;
-      this.router.navigate(['/platilloall'],{
+      this.router.navigate(['/platillo/all'],{
         queryParams: {create:'true'}
       });
     });

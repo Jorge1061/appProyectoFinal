@@ -30,8 +30,11 @@
             <mat-error *ngIf="platilloForm.controls['nombre'].hasError('required')" >
               Nombre es <strong>requerido</strong>
             </mat-error>
-            <mat-error>
-              
+            <mat-error *ngIf="platilloForm.controls['nombre'].hasError('pattern')">
+              Nombre <strong>no puede tener</strong> caracteres especiales
+            </mat-error>
+            <mat-error *ngIf="platilloForm.controls['nombre'].hasError('minlength')">
+              Nombre <strong>no puede tener</strong> menos de 2 caracteres
             </mat-error>
           </mat-form-field>
         </div>
@@ -44,6 +47,12 @@
             <mat-error *ngIf="platilloForm.controls['descripcion'].hasError('required')">
               Descripción es <strong>requerido</strong>
             </mat-error>
+            <mat-error *ngIf="platilloForm.controls['descripcion'].hasError('pattern')">
+              Descripción <strong>no puede tener</strong> caracteres especiales
+            </mat-error>
+            <mat-error *ngIf="platilloForm.controls['descripcion'].hasError('minlength')">
+              Descripcion <strong>no puede tener</strong> menos de 10 caracteres
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="col">
@@ -51,6 +60,9 @@
             <input matInput placeholder="Precio" formControlName="precio">
             <mat-error *ngIf="platilloForm.controls['precio'].hasError('required')">
               Precio es <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="platilloForm.controls['precio'].hasError('pattern')">
+              Precio debe ser <strong>número positivo</strong>
             </mat-error>
           </mat-form-field>
         </div>

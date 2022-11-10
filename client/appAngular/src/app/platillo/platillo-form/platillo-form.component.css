@@ -44,7 +44,16 @@
   margin-left: 10%;
 }
 
+
+:host /deep/ .mat-select-value-text {
+  color: #b32428 !important;
+}
+
 ::ng-deep Input.Mat-Input-Element {Color: Rojo; }
+mat-{
+  color: #b32428 !important;
+  background-color: white;
+}
 
 ::ng-deep .mat-option-text {
   color: #b32428 !important;
