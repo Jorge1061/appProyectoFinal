@@ -36,6 +36,7 @@ module.exports.getById = async (request, response, next) => {
   response.json(platillo);
 };
 
+
 //Crear un platillo
 module.exports.create = async (request, response, next) => {
   let platillo = request.body;

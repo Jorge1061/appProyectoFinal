@@ -14,6 +14,8 @@ const generoRouter = require("./routes/categoriaRoutes");
 const platilloRouter = require("./routes/platilloRoutes");
 const pedidoRouter = require("./routes/pedidoRoutes");
 const mesaRouter = require("./routes/mesaRoutes");
+const rolRouter = require("./routes/rolRoutes");
+const userRouter = require("./routes/userRoutes");
 const estadoRouter = require("./routes/estadoRoutes");
 
 // Acceder a la configuracion del archivo .env
@@ -42,6 +44,8 @@ app.use("/categoria/", generoRouter);
 app.use("/platillo/", platilloRouter);
 app.use("/pedido/", pedidoRouter);
 app.use("/mesa/", mesaRouter);
+app.use("/rol/", rolRouter); 
+app.use("/user/", userRouter);
 app.use("/estado/", estadoRouter);
 
 // Servidor

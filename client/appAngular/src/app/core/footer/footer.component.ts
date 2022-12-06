@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+  authService: any;
+  currentUser: any;
+  isAutenticated: any;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {//Subscripción a la información del usuario actual
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    
+    //Subscripción al booleano que indica si esta autenticado
+    this.authService.isAuthenticated.subscribe(
+      (valor) => (this.isAutenticated = valor)
+    
+    );
   }
 
 }

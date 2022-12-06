@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,11 +9,11 @@ import { NotificacionService } from 'src/app/share/notification.service';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
-  selector: 'app-inicio',
-  templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  selector: 'app-user-create',
+  templateUrl: './user-create.component.html',
+  styleUrls: ['./user-create.component.css'],
 })
-export class InicioComponent implements OnInit {
+export class UserCreateComponent implements OnInit {
   hide = true;
   usuario: any;
   roles: any;
@@ -27,13 +26,16 @@ export class InicioComponent implements OnInit {
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
-    private authService: AuthenticationService,
+    private authService: AuthenticationService
   ) {
     this.reactiveForm();
   }
 
   reactiveForm() {
     this.formCreate = this.fb.group({
+      nombre: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
       role: [''],
     });
     this.getRoles();
@@ -54,14 +56,43 @@ export class InicioComponent implements OnInit {
     (valor) => (this.isAutenticated = valor)
   );
 }
-
-Siguiente(id: number){
-  this.router.navigate(['platillo/restaurante', id]);
-}
-
+  submitForm() {
+    this.makeSubmit=true;
+    //Validación
+    if(this.formCreate.invalid){
+     return;
+    }
+    this.authService.createUser(this.formCreate.value)
+    .subscribe((respuesta:any)=>{
+      this.usuario=respuesta;
+      this.router.navigate(['/usuario/login'],{
+        //Mostrar un mensaje
+        queryParams:{register:'true'},
+      })
+    })
+  }
+  submitForm2() {
+    this.makeSubmit=true;
+    //Validación
+    if(this.formCreate.invalid){
+     return;
+    }
+    this.authService.createUser(this.formCreate.value)
+    .subscribe((respuesta:any)=>{
+      this.usuario=respuesta;
+      this.router.navigate(['/usuario/registrarRol'],{
+        //Mostrar un mensaje
+        queryParams:{register:'true'},
+      })
+    })
+  }
+  onReset() {
+    this.router.navigate(['/usuario/login']);
+    this.formCreate.reset();
+  }
   getRoles() {
     this.gService
-      .list('restaurante/')
+      .list('rol')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.roles = data;

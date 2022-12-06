@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { ShareModule } from './share/share.module';
 import { HomeModule } from './home/home.module';
-import { UserModule } from './user/user.module';
 import {HttpClientModule} from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule } from '@angular/material/button'
@@ -25,6 +24,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { MesaModule } from './mesa/mesa.module';
 import { PlatilloModule} from './platillo/platillo.module';
 import { PedidoModule} from './pedido/pedido.module';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({ 

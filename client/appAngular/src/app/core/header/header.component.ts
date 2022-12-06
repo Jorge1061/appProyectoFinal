@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/share/authentication.service';
+import { CartService } from 'src/app/share/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -7,19 +9,51 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  isAutenticated: boolean | undefined;
+  isAutenticated: boolean;
   currentUser: any;
-  constructor(private router: Router) { } 
+  qtyItems:Number = 0;
+  constructor( private cartService: CartService,
+    private authService: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute) { }
+
   ngOnInit(): void {
-    this.isAutenticated = true;
-    let user = {
-      nombre: 'Prueba',
-      email: 'delizia@prueba.com'
-    };
-    this.currentUser = user;
+      //Valores de prueba
+   /*  this.isAutenticated=true;
+    let user = { 
+      name:"Tom", 
+      email:"tHanks@prueba.com" 
+   }; 
+    this.currentUser=user; */
+    //Subscripción a la información del usuario actual
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    
+    //Subscripción al booleano que indica si esta autenticado
+    this.authService.isAuthenticated.subscribe(
+      (valor) => (this.isAutenticated = valor)
+    );
+    //Suscribirse al observable que gestiona la cantidad de items del carrito
+    this.cartService.countItems.subscribe((value)=>{
+      this.qtyItems=value;
+    });
   }
   irInicio() { 
     // Redireccionar a la ruta raíz 
     this.router.navigate(['/']); 
   }
+
+  listaIngredientesByRest(id: number) {
+    this.router.navigate(['/platillo/restaurante', id], {
+      relativeTo: this.route,
+    });
+  }
+
+  login(){
+    this.router.navigate(['usuario/login']);
+  }
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['usuario/login']);
+  }
+
 }

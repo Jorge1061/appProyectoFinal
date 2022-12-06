@@ -29,22 +29,6 @@ async function main() {
 
 
 
-  await prisma.rol.create({
-    data: {
-      descripcion:"Administrador",
-    }
-  });
-  await prisma.rol.create({
-    data: {
-      descripcion:"Mesero",
-    }
-  });
-  await prisma.rol.create({
-    data: {
-      descripcion:"Cliente",
-    }
-  });
-
 
 
 
@@ -55,11 +39,7 @@ async function main() {
       email:'jduran@auraportal.com',
       password:'1235',
       direccion:'Coyol de Alajuela, 50mts sur de entrada calle la margarita',
-      rol : {
-        connect:{
-          id:1
-        }
-      },
+      
       restaurante : {
         connect:{
           id:1
@@ -68,19 +48,6 @@ async function main() {
     }
   });  
 
-
-
-
-  await prisma.cliente.create({
-    data: {
-      nombre:'Jorge',
-      apellido1:'Durán',
-      apellido2:"Acuña",
-      descripcion:"Cliente inicial",
-      direccion:'Coyol de Alajuela, 50mts sur de entrada calle la margarita',
-      email:'jduran@auraportal.com'
-    }
-  });  
 
 
 
@@ -614,11 +581,6 @@ async function main() {
           id:1
         }
       },
-      cliente : {
-        connect:{
-          id:1
-        }
-      },
       platillos : {
         createMany: {
           data: [
@@ -647,11 +609,6 @@ async function main() {
   await prisma.pedido.create({
     data: {
       usuario : {
-        connect:{
-          id:1
-        }
-      },
-      cliente : {
         connect:{
           id:1
         }

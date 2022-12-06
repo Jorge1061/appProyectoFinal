@@ -14,33 +14,20 @@ model Usuario {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   nombre    String
-  rol       Rol      @relation(fields: [rolId], references: [id])
-  rolId     Int
+  role     Role    @default(USER)
   password  String
-  direccion String
+  direccion String ?
   odenes    Pedido[]
   restaurante   Restaurante @relation(fields: [restauranteId], references: [id])
-  restauranteId Int
+  restauranteId Int 
 }
 
-model Cliente {
-  id          Int      @id @default(autoincrement())
-  email       String   @unique
-  nombre      String
-  apellido1   String
-  apellido2   String
-  descripcion String
-  direccion   String
-  odenes      Pedido[]
-}
 
 model Pedido {
   id         Int                 @id @default(autoincrement())
   fechaPedido DateTime            @default(now())
   usuario    Usuario             @relation(fields: [usuarioId], references: [id])
   usuarioId  Int
-  cliente    Cliente             @relation(fields: [clienteId], references: [id])
-  clienteId  Int
   platillos  PedidoOnPlatillos[]
   mesa       Mesa                @relation(fields: [mesaId], references: [id])
   mesaId     Int
@@ -114,13 +101,6 @@ model EstadoMesas{
   mesas       Mesa[]
 }
 
-model Rol {
-  id          Int       @id @default(autoincrement())
-  descripcion String
-  usuarios    Usuario[]
-}
-
-
 
 model Restaurante {
   id        Int    @id @default(autoincrement())
@@ -152,4 +132,10 @@ model OpcionPago{
   id          Int                 @id @default(autoincrement())
   descripcion String
   facturas    Factura[]
+}
+
+enum Role {
+  USER
+  ADMIN
+  MESERO
 }
