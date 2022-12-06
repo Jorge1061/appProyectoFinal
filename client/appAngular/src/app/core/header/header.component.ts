@@ -42,15 +42,15 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']); 
   }
 
-  listaIngredientesByRest(id: number) {
-    this.router.navigate(['/platillo/restaurante', id], {
-      relativeTo: this.route,
-    });
-  }
 
   login(){
     this.router.navigate(['usuario/login']);
   }
+
+  mesas(id:any){
+    this.router.navigate(['mesa/rest', id]);
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['usuario/login']);

@@ -5,7 +5,7 @@ import { GenericService } from 'src/app/share/generic.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NotificacionService } from 'src/app/share/notification.service';
+import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 
 @Component({
@@ -22,11 +22,13 @@ export class UserCreateComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   isAutenticated: boolean;
   currentUser: any;
+
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private gService: GenericService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private noti: NotificacionService
   ) {
     this.reactiveForm();
   }
@@ -56,39 +58,73 @@ export class UserCreateComponent implements OnInit {
     (valor) => (this.isAutenticated = valor)
   );
 }
-  submitForm() {
-    this.makeSubmit=true;
-    //Validación
-    if(this.formCreate.invalid){
-     return;
-    }
-    this.authService.createUser(this.formCreate.value)
-    .subscribe((respuesta:any)=>{
-      this.usuario=respuesta;
-      this.router.navigate(['/usuario/login'],{
-        //Mostrar un mensaje
-        queryParams:{register:'true'},
-      })
-    })
+submitForm() {
+  this.makeSubmit = true;
+
+  if (this.formCreate.invalid) {
+    return;
   }
+
+  this.gService
+    .get('user', this.formCreate.value.email)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data: any) => {
+      if (data) {
+        this.noti.mensaje(
+          'Usuario',
+          'Este usuario ya se encuentra registrado',
+          TipoMessage.warning
+        );
+        return;
+      } else {
+        this.authService
+          .createUser(this.formCreate.value)
+          .subscribe((respuesta: any) => {
+            this.router.navigate(['/usuario/login'], {
+              queryParams: { register: 'true' },
+            });
+          });
+        return;
+      }
+    });
+}
   submitForm2() {
-    this.makeSubmit=true;
-    //Validación
-    if(this.formCreate.invalid){
-     return;
-    }
-    this.authService.createUser(this.formCreate.value)
-    .subscribe((respuesta:any)=>{
-      this.usuario=respuesta;
-      this.router.navigate(['/usuario/registrarRol'],{
-        //Mostrar un mensaje
-        queryParams:{register:'true'},
-      })
-    })
+    
+  this.makeSubmit = true;
+
+  if (this.formCreate.invalid) {
+    return;
+  }
+  this.gService
+    .get('user', this.formCreate.value.email)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data: any) => {
+      if (data) {
+        this.noti.mensaje(
+          'Usuario',
+          'Este usuario ya se encuentra registrado',
+          TipoMessage.warning
+        );
+        return;
+      } else {
+        this.authService
+          .createUser(this.formCreate.value)
+          .subscribe((respuesta: any) => {
+            this.router.navigate(['/usuario/registrarRol'], {
+              queryParams: { register: 'true' },
+            });
+          });
+
+        return;
+      }
+    });
   }
   onReset() {
     this.router.navigate(['/usuario/login']);
     this.formCreate.reset();
+  }
+  onBack() {
+    this.router.navigate(['/usuario/all']);
   }
   getRoles() {
     this.gService

@@ -8,6 +8,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -38,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
+    MatButtonToggleModule,
     LayoutModule,
     MatTableModule,
     MatPaginatorModule,

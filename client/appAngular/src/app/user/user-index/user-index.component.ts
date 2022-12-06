@@ -39,4 +39,7 @@ export class UserIndexComponent implements OnInit {
     
     this.router.navigate(['/usuario/'], { relativeTo: this.route });
   }
+  onBack() {
+    this.router.navigate(['/usuario/all']);
+  }
 }

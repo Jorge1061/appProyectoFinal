@@ -31,6 +31,12 @@ const routes: Routes = [
     roles: ['ADMIN', 'MESERO'],
   },},
 
+  {path:'mesa/rest/:id', component: MesaIndexComponent,
+  canActivate: [AuthGuard],
+  data: {
+    roles: ['ADMIN', 'MESERO'],
+  },},
+
   {path:'mesa/update/:id', component: MesaFormComponent,
   canActivate: [AuthGuard],
   data: {

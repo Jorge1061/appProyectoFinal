@@ -46,6 +46,10 @@ export class UserAllComponent implements AfterViewInit {
       });
   }
 
+  registrarUser() {
+    this.router.navigate(['usuario/registrarRol']);
+  }
+
   onBack() {
     this.router.navigate(['/']);
   }

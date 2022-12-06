@@ -6,6 +6,24 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 
+
+//Obtener por Id
+module.exports.getExiste = async (request, response, next) => {
+  let id = request.params.id;
+  const usuario = await prisma.usuario.findUnique({
+    where: { email: id },
+    include:{
+      restaurante:true
+    }
+  });
+  console.log(usuario);
+  if(usuario == null){
+    response.json(false);
+  }else{
+    response.json(true);
+  }
+};
+
 module.exports.get = async (request, response, next) => {
   const users = await prisma.usuario.findMany({
     orderBy: {

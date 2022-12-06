@@ -9,12 +9,24 @@ mat-paginator{
     
     
 }
+.return {
+    background-color: green
+  }
 table{
     width: 100%;
     border:solid 1px #b32428;
 
 }
-
+.agregar{
+    background-color: white;
+    color:#b32428;
+    font-weight: bold;
+    width: 17%;
+    height: 50px;
+    padding-top: 10px;
+    border-radius: 50px 50px 50px 50px;
+    border-style: dotted;
+  }
 th{
 
     background-color: white;
@@ -26,7 +38,6 @@ th{
 .ver{
     width: 5%;
 }
-
 td{
     height: 100px;
     color:green;
@@ -73,6 +84,10 @@ h1 {
         margin-left: 50px;
         margin-bottom: 50px;
         margin-right: 50px;
+    }
+
+    .nuevo{
+        background-color: #b32428;
     }
     
     .dashboard-card {

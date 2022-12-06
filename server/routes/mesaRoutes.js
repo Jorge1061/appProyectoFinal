@@ -12,6 +12,8 @@ router.post("/", mesaController.create);
 
 router.get("/:id", mesaController.getById);
 
+router.get("/rest/:id",mesaController.getByIdRestaurante);
+
 router.put("/:id", mesaController.update);
 
 module.exports = router;

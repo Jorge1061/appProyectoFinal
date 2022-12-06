@@ -15,6 +15,25 @@
       </button>
     </div>
     <h1 class="mat-p">Información de Usuarios</h1>
+    <div class="agregar">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a>Agregar nuevo usuario</a>
+
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+      <button
+        class="nuevo"
+        mat-mini-fab
+        matTooltip="Crear Platillo"
+        aria-label="Crear Platillo"
+        color="primary"
+        (click)="registrarUser()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <br>
+    
     <div class="mat-elevation-z8" *ngIf="dataSource">
       <table
         mat-table

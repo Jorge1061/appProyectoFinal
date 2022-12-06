@@ -19,6 +19,20 @@ module.exports.get = async (request, response, next) => {
   response.json(mesas);
 };
 
+module.exports.getByIdRestaurante = async (request, response, next) => {
+  let id = parseInt(request.params.id);
+  const mesa = await prisma.mesa.findMany({
+    where: {
+      restauranteId: id,
+    },
+    include:{
+      estado:true,
+      restaurante:true,
+    }
+  });
+  response.json(mesa);
+};
+
 module.exports.getById = async (request, response, next) => {
   let id = parseInt(request.params.id);
   const mesa = await prisma.mesa.findUnique({

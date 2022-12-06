@@ -23,6 +23,14 @@
   background-repeat: no-repeat;
         
     }
+
+    .obtener{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #b32428;
+        padding: 10px 15px;
+    }
     
     .abajo{
         height: 100px;

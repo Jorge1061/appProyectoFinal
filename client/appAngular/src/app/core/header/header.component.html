@@ -7,11 +7,19 @@
     <a mat-button [routerLink]="['/']" routerLinkActive="is-active">Inicio</a>
     <a
       mat-button
-      *ngIf="currentUser.user.role == 'ADMIN'||currentUser.user.role == 'MESERO'"
+      *ngIf="currentUser.user.role == 'ADMIN'"
       [routerLink]="['/mesa']"
       routerLinkActive="is-active"
       >Control de Mesas</a
     >
+    <a
+      mat-button
+      *ngIf="currentUser.user.role == 'MESERO'"
+      (click)="mesas(currentUser.user.restauranteId)" 
+      routerLinkActive="is-active"
+      >Control de Mesas</a
+    >
+
     <a mat-button
     *ngIf="currentUser.user.role == 'USER'" 
     [routerLink]="['/platillo']" routerLinkActive="is-active"
@@ -49,7 +57,7 @@
       </button>
       <button
         mat-menu-item
-        [routerLink]="'/usuario/registrarRol'"
+        [routerLink]="'/usuario/all'"
         [routerLinkActive]="'mat-raised-button'"
       >
         Usuarios
@@ -101,3 +109,4 @@
     </div>
   </div>
 </mat-toolbar>
+
