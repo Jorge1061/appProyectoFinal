@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PlatilloIndexComponent implements AfterViewInit {
   datos:any;
+  rest:any;
   destroy$:Subject<boolean>= new Subject<boolean>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -38,7 +39,7 @@ export class PlatilloIndexComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-   
+   this.rest=this.cartService.getRestaurante();
     this.listaPlatillos();
   }
   listaPlatillos() {
@@ -51,11 +52,20 @@ export class PlatilloIndexComponent implements AfterViewInit {
           this.dataSource= new MatTableDataSource(this.datos);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-          
          });
       }
     });
     
+  }
+
+  listaRestaurante() {
+    this.gService
+      .list('restaurante/')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+       // console.log(data);
+        this.listaRestaurante = data;
+      });
   }
 
   verPlatillo(idRestaurante:number,id: number) {

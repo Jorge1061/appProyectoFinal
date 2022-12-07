@@ -5,7 +5,7 @@ CREATE TABLE `Usuario` (
     `nombre` VARCHAR(191) NOT NULL,
     `role` ENUM('USER', 'ADMIN', 'MESERO') NOT NULL DEFAULT 'USER',
     `password` VARCHAR(191) NOT NULL,
-    `direccion` VARCHAR(191) NOT NULL,
+    `direccion` VARCHAR(191) NULL,
     `restauranteId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Usuario_email_key`(`email`),
@@ -43,25 +43,9 @@ CREATE TABLE `Platillo` (
     `estado` BOOLEAN NOT NULL DEFAULT true,
     `precio` DECIMAL(10, 2) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `ingredientes` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Ingrediente` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `descripcion` VARCHAR(191) NOT NULL,
-
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `PlatillosOnIngredientes` (
-    `platilloId` INTEGER NOT NULL,
-    `ingredienteId` INTEGER NOT NULL,
-    `cantidad` VARCHAR(191) NOT NULL,
-
-    PRIMARY KEY (`platilloId`, `ingredienteId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -77,6 +61,7 @@ CREATE TABLE `PedidoOnPlatillos` (
 -- CreateTable
 CREATE TABLE `Mesa` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `numMesa` INTEGER NOT NULL,
     `codigo` VARCHAR(191) NOT NULL,
     `capacidad` INTEGER NOT NULL,
     `restauranteId` INTEGER NOT NULL,
@@ -96,6 +81,7 @@ CREATE TABLE `EstadoMesas` (
 -- CreateTable
 CREATE TABLE `Restaurante` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `inicial` VARCHAR(191) NOT NULL,
     `nombre` VARCHAR(191) NOT NULL,
     `direccion` VARCHAR(191) NOT NULL,
     `telefono` VARCHAR(191) NOT NULL,
@@ -154,12 +140,6 @@ ALTER TABLE `Pedido` ADD CONSTRAINT `Pedido_estadoId_fkey` FOREIGN KEY (`estadoI
 
 -- AddForeignKey
 ALTER TABLE `Platillo` ADD CONSTRAINT `Platillo_categoriaId_fkey` FOREIGN KEY (`categoriaId`) REFERENCES `Categoria`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `PlatillosOnIngredientes` ADD CONSTRAINT `PlatillosOnIngredientes_platilloId_fkey` FOREIGN KEY (`platilloId`) REFERENCES `Platillo`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `PlatillosOnIngredientes` ADD CONSTRAINT `PlatillosOnIngredientes_ingredienteId_fkey` FOREIGN KEY (`ingredienteId`) REFERENCES `Ingrediente`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `PedidoOnPlatillos` ADD CONSTRAINT `PedidoOnPlatillos_pedidoId_fkey` FOREIGN KEY (`pedidoId`) REFERENCES `Pedido`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

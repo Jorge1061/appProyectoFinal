@@ -38,8 +38,15 @@ mat-footer-cell{
   background-color: green;
 }
 
+.mat-raised-button{
+  background-color: #b32428;
+  padding: 5px 40px;
+  margin-right: 5%;
+  float: right;
+}
+
 .return {
-  background-color: green
+  background-color: green;
 }
 h1 {
       text-align: center;
@@ -107,6 +114,10 @@ h1 {
 
   mat-icon {
       color: white
+  }
+
+  mat-icon-button{
+    color: #b32428;
   }
   
   .info {
