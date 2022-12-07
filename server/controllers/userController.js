@@ -64,6 +64,7 @@ module.exports.register = async (request, response, next) => {
     data: user,
   });
 };
+
 module.exports.login = async (request, response, next) => {
   let userReq = request.body;
   //Buscar el usuario según el email dado
@@ -79,32 +80,35 @@ module.exports.login = async (request, response, next) => {
       message: "Usuario no registrado",
     });
   }
-  //Verifica la contraseña
-  const checkPassword = bcrypt.compare(userReq.password, user.password);
-  if (checkPassword) {
-    //Si el usuario es correcto: email y password
-    //Crear el token
-    const payload = {
-      email: user.email,
-      role: user.role,
-    };
-    //Crea el token con el payload, llave secreta
-    // y el tiempo de expiración
-    const token = jwt.sign(payload, process.env.SECRET_KEY, {
-      expiresIn: process.env.JWT_EXPIRE,
-    });
-    response.json({
-      success: true,
-      message: "Usuario registrado",
-      data: {
-        user,
-        token,
-      },
-    });
-  } else {
-    response.status(401).send({
-      success: false,
-      message: "Password incorrecto",
-    });
+
+  if (user && userReq.password) {
+    //Verifica la contraseña
+    const checkPassword = bcrypt.compareSync(userReq.password, user.password);
+    if (checkPassword) {
+      //Si el usuario es correcto: email y password
+      //Crear el token
+      const payload = {
+        email: user.email,
+        role: user.role,
+      };
+      //Crea el token con el payload, llave secreta
+      // y el tiempo de expiración
+      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+        expiresIn: process.env.JWT_EXPIRE,
+      });
+      response.json({
+        success: true,
+        message: "Usuario registrado",
+        data: {
+          user,
+          token,
+        },
+      });
+    } else {
+      response.status(401).send({
+        success: false,
+        message: "Password incorrecto",
+      });
+    }
   }
 };

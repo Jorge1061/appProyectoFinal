@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotificacionService } from 'src/app/share/notification.service';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { CartService } from 'src/app/share/cart.service';
 
 @Component({
   selector: 'app-inicio',
@@ -28,6 +29,7 @@ export class InicioComponent implements OnInit {
     private router: Router,
     private gService: GenericService,
     private authService: AuthenticationService,
+    private cartService:CartService
   ) {
     this.reactiveForm();
   }
@@ -56,7 +58,8 @@ export class InicioComponent implements OnInit {
 }
 
 Siguiente(id: number){
-  this.router.navigate(['platillo/restaurante', id]);
+  this.cartService.setRestaurante(id);
+  this.router.navigate(['platillo/']);
 }
 
   getRoles() {

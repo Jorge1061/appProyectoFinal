@@ -74,16 +74,11 @@
       <!-- Enlaces de la aplicación -->
       <!-- https://fonts.google.com/icons -->
       <!--https://material.angular.io/guide/typography-->
+      <button mat-icon-button *ngIf="currentUser.user.role == 'USER'" matBadgeColor="accent" [matBadge]="qtyItems.toString()" 
+       [routerLink]="'/pedidoCliente'" [routerLinkActive]="'mat-raised-button'"  aria-label="Cantidad">
+     <mat-icon>shopping_cart</mat-icon>
+   </button>
 
-      <button
-        mat-icon-button
-        matBadgeColor="accent"
-        [routerLink]="'/orden'"
-        [routerLinkActive]="'mat-raised-button'"
-        aria-label="Cantidad"
-      >
-        <mat-icon>shopping_cart</mat-icon>
-      </button>
       &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
       <span class="mat-caption" *ngIf="isAutenticated">
         {{ currentUser.user.email }}</span

@@ -1,10 +1,9 @@
 body {
   display: flex;
   justify-content: center;
-  height: 100%;
-    background-image: url("/assets/images/fondo.jpeg");
-    background-repeat: repeat-y;
-    background-size: 100%;
+  height: auto;
+  background-image: url("/assets/images/fondo.jpeg");
+  background-repeat: no-repeat;
 }
 .abajo{
   height: 100px;
@@ -53,6 +52,10 @@ h1{
   font-family: Arial, Helvetica, sans-serif;
   font-size: xx-large;
   
+}
+
+.button {
+  background-color: #b32428;
 }
 
 mat-icon {

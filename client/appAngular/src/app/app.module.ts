@@ -22,9 +22,10 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatDialogModule} from "@angular/material/dialog";
 import { MesaModule } from './mesa/mesa.module';
-import { PlatilloModule} from './platillo/platillo.module';
+
 import { PedidoModule} from './pedido/pedido.module';
 import { UserModule } from './user/user.module';
+import { PlatilloModule } from './platillo/platillo.module';
 
 
 @NgModule({ 

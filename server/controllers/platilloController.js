@@ -1,21 +1,65 @@
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
-//Obtener listado
+
 module.exports.get = async (request, response, next) => {
-  const platillos = await prisma.platillo.findMany({
+  let idRestaurante = parseInt(request.params.idRestaurante);
+  var platillos = await prisma.platillo.findMany({
+    
     orderBy: {
       nombre: 'asc',
     },
     include:{
       categoria: true,
       restaurantes: {
-        select:{nombre:true}
+        select:{
+          id:true,
+          nombre:true},
+          
       },
-    }
+    },
+
   });
+
+  
   response.json(platillos);
 }; 
+//Obtener listado
+module.exports.getByRestaurante = async (request, response, next) => {
+  let idRestaurante = parseInt(request.params.idRestaurante);
+  var platillos = await prisma.platillo.findMany({
+    
+    orderBy: {
+      nombre: 'asc',
+    },
+    include:{
+      categoria: true,
+      restaurantes: {
+        select:{
+          id:true,},
+          where: { id: idRestaurante }, 
+      },
+    },
+
+  });
+  platillos=filtrarPlatillos(platillos);
+  
+  response.json(platillos);
+}; 
+
+function filtrarPlatillos(platillos){
+  platillos.forEach(function(currentValue, index, arr){
+
+    if(platillos[index].restaurantes.length==0){
+        platillos.splice(index, index); 
+        eliminado=true  
+        platillos=filtrarPlatillos(platillos);
+     }
+    }   
+    )
+
+  return platillos;
+}
 
 //Obtener por Id
 module.exports.getById = async (request, response, next) => {
@@ -24,15 +68,11 @@ module.exports.getById = async (request, response, next) => {
     where: { id: id },
     include: {
       categoria: true,
-      ingredientes:{
-        select:{
-          ingrediente:true,
-          cantidad:true
-        }
-      },
+
       restaurantes:true
     },
   });
+  
   response.json(platillo);
 };
 

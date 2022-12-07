@@ -9,7 +9,6 @@ const prism = new PrismaClient();
 
 //--- Archivos de rutas ---
 const restRouter = require("./routes/restauranteRoutes");
-const ingredienteRouter = require("./routes/ingredienteRoutes");
 const generoRouter = require("./routes/categoriaRoutes");
 const platilloRouter = require("./routes/platilloRoutes");
 const pedidoRouter = require("./routes/pedidoRoutes");
@@ -39,7 +38,6 @@ app.use(
 
 //---- Definir rutas ---- 
 app.use("/restaurante/", restRouter);
-app.use("/ingrediente/", ingredienteRouter);
 app.use("/categoria/", generoRouter);
 app.use("/platillo/", platilloRouter);
 app.use("/pedido/", pedidoRouter);

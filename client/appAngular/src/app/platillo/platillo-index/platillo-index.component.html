@@ -45,15 +45,25 @@
           <ng-container matColumnDef="ver">
             <th mat-header-cell *matHeaderCellDef class="ver">Ver</th>
             <td mat-cell *matCellDef="let row">
-              <button class="info"
+              <button class="button"
                 mat-mini-fab
                 matTooltip="Ver Platillo"
                 aria-label="Ver Platillo"
                 color="primary"
-                (click)="verPlatillo(row.id)"
+                (click)="verPlatillo(idRestaurante,row.id)"
               >
                 <mat-icon>info icon</mat-icon>
               </button>
+              <button class="button"
+              mat-mini-fab color="accent"
+              matTooltip="Comprar"
+              aria-label="Comprar"
+              color="primary"
+              (click)="comprar(row.id)"
+            >
+        
+        <mat-icon class="mat-18">add_shopping_cart</mat-icon>
+        </button>
             </td>
           </ng-container>
 

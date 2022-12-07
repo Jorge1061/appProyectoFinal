@@ -10,6 +10,7 @@ module.exports.get = async (request, response, next) => {
   });
   response.json(restaurantes);
 };
+
 module.exports.getById = async (request, response, next) => {
   let id = parseInt(request.params.id);
   const restaurante = await prisma.restaurante.findUnique({

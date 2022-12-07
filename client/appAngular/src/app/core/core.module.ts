@@ -11,6 +11,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu'; 
 import {MatCardModule} from '@angular/material/card';	
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatBadgeModule} from '@angular/material/badge';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -25,7 +26,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatButtonModule,
     MatGridListModule,
     MatMenuModule,
-    MatCardModule
+    MatCardModule,
+    MatBadgeModule
+
   ],
   exports: [HeaderComponent, FooterComponent],
 })

@@ -53,144 +53,6 @@ async function main() {
 
 
 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Ajo",
-    }
-  });  
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Anchoa",
-    }
-  });  
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Aceite extra",
-    }
-  });  
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Crema de leche",
-    }
-  });  
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Nuez",
-    }
-  });  
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Blocoli",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Coliflor",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Papa",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Milanesa",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Raviol",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Zanahoria",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Apio",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Repollito de Bruselas",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Pan",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Aceite de Oliva",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Leche",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Yema",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Azúcar",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Escencia de vainilla",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Puré de fresa",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Chispa de chocolate",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Masa de pizza italiana",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Quezo mozzarella",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Albahaca",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Salsa de tomate natural triturado",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Sal",
-    }
-  }); 
-  await prisma.ingrediente.create({
-    data: {
-      descripcion:"Pimienta",
-    }
-  }); 
-
-
-
 
   await prisma.categoria.create({
     data: {
@@ -227,27 +89,7 @@ async function main() {
           id:1
         }
       },
-      ingredientes: {
-        createMany: {
-          data: [
-            { cantidad: '5 dientes', ingredienteId: 1 },
-            { cantidad: '5', ingredienteId: 2 },
-            { cantidad: '1', ingredienteId: 3 },
-            { cantidad: '1/2', ingredienteId: 4 },
-            { cantidad: '1', ingredienteId: 5 },
-            { cantidad: '1/2', ingredienteId: 6 },
-            { cantidad: '1/2', ingredienteId: 7 },
-            { cantidad: '2 chicas', ingredienteId: 8 },
-            { cantidad: '2', ingredienteId: 9 },
-            { cantidad: '1 caja', ingredienteId: 10 },
-            { cantidad: '1', ingredienteId: 11 },
-            { cantidad: '3 tallos', ingredienteId: 12 },
-            { cantidad: '200g', ingredienteId: 13 },
-            { cantidad: '3/4', ingredienteId: 14 },
-            { cantidad: '1', ingredienteId: 15 },
-          ]
-        }
-      },
+      ingredientes: '',
       restaurantes:{
         connect:[{id:1},{id:2},{id:3}]
       }, 
@@ -263,18 +105,7 @@ async function main() {
           id:4
         }
       },
-      ingredientes: {
-        createMany: {
-          data: [
-            { cantidad: '750ml', ingredienteId: 16 },
-            { cantidad: '5', ingredienteId: 17 },
-            { cantidad: '200 gr', ingredienteId: 18 },
-            { cantidad: '1 cucharadita', ingredienteId: 19 },
-            { cantidad: '1 taza', ingredienteId: 20 },
-            { cantidad: '1 taza', ingredienteId: 3 },
-          ]
-        }
-      },
+      ingredientes: '',
       restaurantes:{
         connect:[{id:2}]
       }, 
@@ -290,19 +121,7 @@ async function main() {
           id:3
         }
       },
-      ingredientes: {
-        createMany: {
-          data: [
-            { cantidad: '220gr', ingredienteId: 22 },
-            { cantidad: '90gr', ingredienteId: 23 },
-            { cantidad: '1', ingredienteId: 24 },
-            { cantidad: '100gr', ingredienteId: 25 },
-            { cantidad: 'al gusto', ingredienteId: 26 },
-            { cantidad: 'al gusto', ingredienteId: 27 },
-            { cantidad: 'al gusto', ingredienteId: 3 },
-          ]
-        }
-      },
+      ingredientes: '',
       restaurantes:{
         connect:[{id:1}]
       }, 

@@ -26,7 +26,16 @@
                 <li *ngFor="let item of platilloInfo.ingredientes"> {{item.cantidad}} {{item.ingrediente.descripcion}}</li>
              </ul>
              <br>
-              
+             <button class="button"
+             mat-mini-fab color="accent"
+             matTooltip="Comprar"
+             aria-label="Comprar"
+             color="primary"
+             (click)="comprar(platilloInfo.id)"
+           >
+           
+           <mat-icon class="mat-18">add_shopping_cart</mat-icon>
+           </button>
           </div>
           
       </div>

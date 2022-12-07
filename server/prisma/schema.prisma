@@ -54,25 +54,11 @@ model Platillo {
   estado      Boolean             @default(true)
   precio      Decimal             @db.Decimal(10, 2)
   createdAt   DateTime            @default(now())
-  ingredientes PlatillosOnIngredientes[]
+  ingredientes String
   pedidos     PedidoOnPlatillos[]
   restaurantes Restaurante[]
 }
 
-model Ingrediente {
-  id          Int       @id @default(autoincrement())
-  descripcion String
-  platillos    PlatillosOnIngredientes[]
-}
-
-model PlatillosOnIngredientes {
-  platillo     Platillo   @relation(fields: [platilloId], references: [id])
-  platilloId   Int
-  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
-  ingredienteId Int
-  cantidad   String
-  @@id([platilloId, ingredienteId])
-} 
 
 model PedidoOnPlatillos {
   pedido     Pedido   @relation(fields: [pedidoId], references: [id])

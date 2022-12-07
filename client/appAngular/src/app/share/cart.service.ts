@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { GenericService } from './generic.service';
 // Definir clase con las propiedades que es necesario que gestione el carrito
 export class ItemCart {
+
   idItem: number;
   product: any;
   cantidad: number;
@@ -12,10 +15,15 @@ export class ItemCart {
   providedIn: 'root',
 })
 export class CartService {
+  private restaurante;
+  private mesa;
+  private carts = new BehaviorSubject<ItemCart[]>(null)[50];
   private cart = new BehaviorSubject<ItemCart[]>(null); //Definimos nuestro BehaviorSubject, este debe tener un valor inicial siempre
   public currentDataCart$ = this.cart.asObservable(); //Tenemos un observable con el valor actual del BehaviorSubject
   public qtyItems = new Subject<number>();
-  constructor() {
+  destroy$:Subject<boolean>= new Subject<boolean>();
+  constructor(private gService: GenericService,private activeRouter: ActivatedRoute) {
+
     //Obtener los datos de la variable orden guardada en el localStorage
     this.cart = new BehaviorSubject<any>(
       JSON.parse(localStorage.getItem('orden'))
@@ -23,17 +31,22 @@ export class CartService {
 
     //Establecer un observable para los datos del carrito
     this.currentDataCart$ = this.cart.asObservable();
+    this.restaurante=0;
+    this.mesa=0;
   }
   saveCart(): void {
     localStorage.setItem('orden', JSON.stringify(this.cart.getValue()));
   }
-  addToCart(producto: any) {
+  addToCart(producto: any){
+    this.addToCartMany(producto,1)
+  }
+  addToCartMany(producto: any,cantidad) {
     const newItem = new ItemCart();
     //Armar instancia de ItemCart con los valores respectivos del producto
     //producto.id es cuando viene desde el boton comprar y trae la información del API
     newItem.idItem = producto.id | producto.idItem;
     newItem.precio = producto.precio;
-    newItem.cantidad = 1;
+    newItem.cantidad = cantidad;
     newItem.subtotal = this.calculoSubtotal(newItem);
     newItem.product = producto;
     //Obtenemos el valor actual
@@ -77,6 +90,7 @@ export class CartService {
     //Actualizar la información en el localStorage
     this.saveCart();
   }
+   
   //Calcula el subtotal del item del carrito que se indique
   private calculoSubtotal(item: ItemCart) {
     return item.precio * item.cantidad;
@@ -144,5 +158,39 @@ export class CartService {
     this.qtyItems.next(0);
     //Actualizar la información en el localStorage
     this.saveCart();
+  }
+  public setRestaurante(restaurante){
+    if(restaurante!=this.restaurante)
+      this.deleteCart();
+    this.restaurante=restaurante;
+    
+  }
+  public getRestaurante(){
+    return this.restaurante;
+  }
+  public setMesa(numMesa,idMesa){
+    if(numMesa!=this.mesa)
+      this.carts[this.mesa]=this.cart;
+    this.obtenerCarrito(numMesa,idMesa);
+    this.mesa=numMesa;
+  }
+  public getMesa(){
+    return this.mesa;
+  }
+  private obtenerCarrito(numMesa,idMesa){
+    this.cart=this.carts[numMesa];
+    if(this.cart.value==null){
+      this.activeRouter.params.subscribe((params:Params)=>{
+           //Obtener Pedido a actualizar del API
+           this.gService.get('ordenByMesa',idMesa).pipe(takeUntil(this.destroy$))
+           .subscribe((data:any)=>{
+            if(data.platillos.length>0){
+              data.platillos.forEach(function(currentValue, index, arr){
+                this.addToCartMany(data.platillos[index].platillo,data.platillos[index].cantidad);
+              })
+            }
+           })
+      })
+    }
   }
 }

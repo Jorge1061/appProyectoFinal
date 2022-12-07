@@ -14,17 +14,19 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort'; 
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatDialogModule} from "@angular/material/dialog";
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { PedidoDetailComponent } from './pedido-detail/pedido-detail.component';
+import { PedidoClienteComponent } from './pedido-cliente/pedido-cliente.component';
 
 
 @NgModule({
   declarations: [
     PedidoIndexComponent,
-    PedidoDetailComponent
+    PedidoDetailComponent,
+    PedidoClienteComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { PedidoDetailComponent } from './pedido-detail/pedido-detail.component';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
+    FormsModule,
     ReactiveFormsModule
   ]
 })

@@ -12,6 +12,7 @@ mat-paginator{
 table{
   width: 100%;
   border:solid 1px #b32428;
+
 }
 
 th{
@@ -19,26 +20,17 @@ th{
   background-color: white;
   color:#b32428;
   font-weight: bold;
-  width: 10%;
+
+  width: 19%;
 }
-.acciones{
+.ver{
   width: 5%;
 }
 
-.agregar{
-  background-color: white;
-  color:#b32428;
-  font-weight: bold;
-  width: 17%;
-  height: 50px;
-  padding-top: 10px;
-  border-radius: 50px 50px 50px 50px;
-  border-style: dotted;
-}
-
 td{
-  height: 150px;
+  height: 100px;
   color:green;
+  
 }
 .return {
   background-color: green
@@ -53,7 +45,7 @@ h1 {
       font-size: xx-large;
      
   }
-
+  
   .full-width {
 
       background-image: url("/assets/images/fondo.jpeg");
@@ -111,11 +103,9 @@ h1 {
       color: white
   }
   
-  .actualizar, .nuevo {
+  .info {
       background-color: #b32428;
   }
-
-  
   
   .divider {
       background-color: #b32428;
