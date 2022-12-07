@@ -167,7 +167,8 @@ export class CartService {
   }
   public getRestaurante(){
     return this.restaurante;
-  }
+  } 
+
   public setMesa(numMesa,idMesa){
     if(numMesa!=this.mesa)
       this.carts[this.mesa]=this.cart;
@@ -182,7 +183,7 @@ export class CartService {
     if(this.cart.value==null){
       this.activeRouter.params.subscribe((params:Params)=>{
            //Obtener Pedido a actualizar del API
-           this.gService.get('ordenByMesa',idMesa).pipe(takeUntil(this.destroy$))
+           this.gService.get('pedido/mesa',idMesa).pipe(takeUntil(this.destroy$))
            .subscribe((data:any)=>{
             if(data.platillos.length>0){
               data.platillos.forEach(function(currentValue, index, arr){

@@ -9,16 +9,16 @@ mat-paginator{
   
   
 }
-table{
+mat-table{
   width: 100%;
   border:solid 1px #b32428;
 
 }
 
-th{
+mat-header-cell{
 
-  background-color: white;
-  color:#b32428;
+  background-color: #b32428;;
+  color:white;
   font-weight: bold;
 
   width: 19%;
@@ -27,11 +27,17 @@ th{
   width: 5%;
 }
 
-td{
+mat-cell{
   height: 100px;
-  color:green;
-  
+  color:black;
+  background-color: white;
 }
+
+mat-footer-cell{
+  color:white;
+  background-color: green;
+}
+
 .return {
   background-color: green
 }

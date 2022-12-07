@@ -8,6 +8,10 @@ const pedidoController = require("../controllers/pedidoController");
 //Definición de rutas para pedidos
 router.get("/", pedidoController.get);
 
+
+
 router.get("/:id", pedidoController.getById);
+
+router.get("/mesa/:idMesa", pedidoController.getByMesa);
 
 module.exports = router;
