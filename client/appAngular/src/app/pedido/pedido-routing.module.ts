@@ -12,10 +12,7 @@ const routes: Routes = [
     roles: ['ADMIN'],
   },},
   {path:'pedidoCliente', component: PedidoClienteComponent,
-  canActivate: [AuthGuard],
-  data: {
-    roles: ['USER'],
-  },},
+  },
   {path:'pedido/:id', component: PedidoDetailComponent,
   canActivate: [AuthGuard],
   data: {

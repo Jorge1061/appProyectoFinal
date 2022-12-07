@@ -17,25 +17,27 @@ export class ItemCart {
 export class CartService {
   private restaurante;
   private mesa;
-  private carts = new BehaviorSubject<ItemCart[]>(null)[50];
   private cart = new BehaviorSubject<ItemCart[]>(null); //Definimos nuestro BehaviorSubject, este debe tener un valor inicial siempre
   public currentDataCart$ = this.cart.asObservable(); //Tenemos un observable con el valor actual del BehaviorSubject
   public qtyItems = new Subject<number>();
   destroy$:Subject<boolean>= new Subject<boolean>();
   constructor(private gService: GenericService,private activeRouter: ActivatedRoute) {
-
+       
+    
     //Obtener los datos de la variable orden guardada en el localStorage
     this.cart = new BehaviorSubject<any>(
-      JSON.parse(localStorage.getItem('orden'))
+      JSON.parse(localStorage.getItem('pedido'+this.mesa))
     );
 
     //Establecer un observable para los datos del carrito
     this.currentDataCart$ = this.cart.asObservable();
-    this.restaurante=0;
-    this.mesa=0;
+    this.restaurante=parseInt(localStorage.getItem('restaurante'));
+    this.mesa=parseInt(localStorage.getItem('mesa'));
   }
   saveCart(): void {
-    localStorage.setItem('orden', JSON.stringify(this.cart.getValue()));
+    localStorage.setItem('pedido'+this.mesa, JSON.stringify(this.cart.getValue()));
+    localStorage.setItem('mesa',this.mesa);
+    localStorage.setItem('restaurante',this.restaurante);
   }
   addToCart(producto: any){
     this.addToCartMany(producto,1)
@@ -169,18 +171,23 @@ export class CartService {
     return this.restaurante;
   } 
 
-  public setMesa(numMesa,idMesa){
-    if(numMesa!=this.mesa)
-      this.carts[this.mesa]=this.cart;
-    this.obtenerCarrito(numMesa,idMesa);
-    this.mesa=numMesa;
+  public setMesa(idMesa){
+    this.saveCart();
+    if(this.mesa!=0 && idMesa!=this.mesa)
+      localStorage.setItem('pedido'+this.mesa, JSON.stringify(this.cart.getValue()));
+    this.obtenerCarrito(idMesa);
+    this.mesa=idMesa;
   }
   public getMesa(){
     return this.mesa;
   }
-  private obtenerCarrito(numMesa,idMesa){
-    this.cart=this.carts[numMesa];
-    if(this.cart.value==null){
+  private obtenerCarrito(idMesa){
+    this.cart=new BehaviorSubject<any>(
+      JSON.parse(localStorage.getItem('pedido'+idMesa))
+    );
+    this.currentDataCart$ = this.cart.asObservable();
+    this.countItems;
+    if(this.cart==undefined){
       this.activeRouter.params.subscribe((params:Params)=>{
            //Obtener Pedido a actualizar del API
            this.gService.get('pedido/mesa',idMesa).pipe(takeUntil(this.destroy$))

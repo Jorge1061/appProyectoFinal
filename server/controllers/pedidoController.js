@@ -41,10 +41,10 @@ module.exports.getByMesa = async (request, response, next) => {
           email: true,
           nombre: true,
           password: true,
-          direccion: true,
+          direccion: true,  
           restauranteId: true,
           role: true,
-        }, 
+        },
       },
     },
   });

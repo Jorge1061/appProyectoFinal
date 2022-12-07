@@ -27,11 +27,14 @@ module.exports.get = async (request, response, next) => {
 //Obtener listado
 module.exports.getByRestaurante = async (request, response, next) => {
   let idRestaurante = parseInt(request.params.idRestaurante);
+  if (idRestaurante==0)
+    response.json(''); 
+    else{
   var platillos = await prisma.platillo.findMany({
     
     orderBy: {
       nombre: 'asc',
-    },
+    }, 
     include:{
       categoria: true,
       restaurantes: {
@@ -44,20 +47,21 @@ module.exports.getByRestaurante = async (request, response, next) => {
   });
   platillos=filtrarPlatillos(platillos);
   
-  response.json(platillos);
+  response.json(platillos);}
 }; 
 
 function filtrarPlatillos(platillos){
+  
   platillos.forEach(function(currentValue, index, arr){
 
     if(platillos[index].restaurantes.length==0){
-        platillos.splice(index, index); 
-        eliminado=true  
-        platillos=filtrarPlatillos(platillos);
+      platillos.splice(index, index); 
+      eliminado=true  
+      platillos=filtrarPlatillos(platillos);
      }
     }   
     )
-
+  
   return platillos;
 }
 

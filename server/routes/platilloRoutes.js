@@ -5,12 +5,12 @@ const router=express.Router();
 const platilloController=require("../controllers/platilloController");
 //Rutas de platillos
 router.get("/",platilloController.get);
-router.get("/:idRestaurante",platilloController.getByRestaurante);
+router.get("/rest/:idRestaurante",platilloController.getByRestaurante);
 
 router.post("/",platilloController.create);
 
 
-router.get("/:idRestaurante/:id",platilloController.getById);
+router.get("/:id",platilloController.getById);
 router.put("/:id",platilloController.update);
 
 

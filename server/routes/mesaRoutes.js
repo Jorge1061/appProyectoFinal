@@ -12,7 +12,7 @@ router.post("/", mesaController.create);
 
 router.get("/:id", mesaController.getById);
 
-router.get("/rest/:id",mesaController.getByIdRestaurante);
+router.get("/rest/:idRestaurante",mesaController.getByRestaurante);
 
 router.put("/:id", mesaController.update);
 

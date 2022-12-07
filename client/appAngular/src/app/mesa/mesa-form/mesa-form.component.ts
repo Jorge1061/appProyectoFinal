@@ -10,7 +10,7 @@ import { GenericService } from 'src/app/share/generic.service';
   styleUrls: ['./mesa-form.component.css']
 })
 export class MesaFormComponent implements OnInit{
-  titleForm:string='Crear';
+  titleForm:string='Crear Mesa';
   destroy$: Subject<boolean> = new Subject<boolean>();
   estadosList:any;
   restaurantesList:any;
@@ -34,14 +34,14 @@ export class MesaFormComponent implements OnInit{
       this.idMesa=params['id'];
       if(this.idMesa!=undefined){
         this.isCreate=false;
-        this.titleForm="Actualizar";
+        
          //Obtener mesa a actualizar del API
          this.gService.get('mesa',this.idMesa).pipe(takeUntil(this.destroy$))
          .subscribe((data:any)=>{
           this.mesaInfo=data;
+          this.titleForm="Actualizar Mesa "+this.mesaInfo.codigo;
           this.mesaForm.setValue({
             id:this.mesaInfo.id,
-            codigo:this.mesaInfo.codigo,
             capacidad:this.mesaInfo.capacidad,
             estadoId:this.mesaInfo.estado.id,
             restauranteId:this.mesaInfo.restaurante.id
@@ -60,10 +60,7 @@ export class MesaFormComponent implements OnInit{
     //[null, Validators.required]
     this.mesaForm=this.fb.group({
       id:[null,null],
-      codigo:[null,Validators.compose([
-        Validators.required, Validators.minLength(2),Validators.maxLength(4),
-        Validators.pattern(/^[A-Za-z0-9ñÑáéíóúÁÉÍÓÚ ]+$/),
-      ])],
+      
 
       capacidad:[null, Validators.compose([Validators.required, 
         Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],

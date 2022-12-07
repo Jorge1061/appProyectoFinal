@@ -25,7 +25,7 @@ export class PlatilloDetailComponent implements OnInit{
       this.idPlatillo=params['id'];
       if(this.idPlatillo!=undefined){
          //Obtener Platillo a actualizar del API
-         this.gService.get('platillo'+"/"+this.cartService.getRestaurante(),this.idPlatillo).pipe(takeUntil(this.destroy$))
+         this.gService.get('platillo',this.idPlatillo).pipe(takeUntil(this.destroy$))
          .subscribe((data:any)=>{
           this.platilloInfo=data;
           

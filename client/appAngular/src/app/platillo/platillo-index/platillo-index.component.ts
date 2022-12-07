@@ -45,7 +45,7 @@ export class PlatilloIndexComponent implements AfterViewInit {
     this.route.params.subscribe((params:Params)=>{
       if(this.idRestaurante!=undefined){
          //Obtener Platillo a actualizar del API
-         this.gService.get('platillo',this.cartService.getRestaurante()).pipe(takeUntil(this.destroy$))
+         this.gService.get('platillo/rest',this.cartService.getRestaurante()).pipe(takeUntil(this.destroy$))
          .subscribe((data:any)=>{
           this.datos = data;
           this.dataSource= new MatTableDataSource(this.datos);
@@ -72,7 +72,7 @@ export class PlatilloIndexComponent implements AfterViewInit {
   }
   comprar(id:number){
     this.gService
-    .get('platillo/'+this.cartService.getRestaurante(),id)
+    .get('platillo/',id)
     .pipe(takeUntil(this.destroy$))
     .subscribe((data:any)=>{
       //Agregar videojuego obtenido del API al carrito

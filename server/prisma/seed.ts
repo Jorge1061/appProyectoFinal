@@ -6,6 +6,7 @@ async function main() {
   await prisma.restaurante.create({
     data: {
       nombre:'Sucursal Alajuela',
+      inicial:'A',
       direccion:'La Agonía, 100mts sur de plaza real',
       telefono:'24242424'
     }
@@ -13,6 +14,7 @@ async function main() {
   await prisma.restaurante.create({
     data: {
       nombre:'Sucursal Heredia',
+      inicial:'H',
       direccion:'Heredia Centro, 50mts sur de la Universidad Nacional',
       telefono:'24242425'
     }
@@ -20,6 +22,7 @@ async function main() {
   await prisma.restaurante.create({
     data: {
       nombre:'Sucursal SanJose',
+      inicial:'S',
       direccion:'Sabana Sur, perpendicular a la Sala Constitucional',
       telefono:'24242426'
     }
@@ -37,12 +40,26 @@ async function main() {
     data: {
       nombre:'Jorge21',
       email:'jduran@auraportal.com',
-      password:'1235',
+      password:'$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO',
       direccion:'Coyol de Alajuela, 50mts sur de entrada calle la margarita',
-      
+      role:'USER',
       restaurante : {
         connect:{
           id:1
+        }
+      }
+    }
+  });  
+  await prisma.usuario.create({
+    data: {
+      nombre:'Jorge22',
+      email:'jduran@auraquantic.com',
+      password:'$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO',
+      direccion:'Coyol de Alajuela, 50mts sur de entrada calle la margarita',
+      role:'ADMIN',
+      restaurante : {
+        connect:{
+          id:2
         }
       }
     }
@@ -197,6 +214,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'A1',
+      numMesa:1,
       capacidad:6,
       estado : {
         connect:{
@@ -214,6 +232,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'A2',
+      numMesa:2,
       capacidad:4,
       estado : {
         connect:{
@@ -231,6 +250,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'A3',
+      numMesa:3,
       capacidad:6,
       estado : {
         connect:{
@@ -247,6 +267,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'A4',
+      numMesa:4,
       capacidad:4,
       estado : {
         connect:{
@@ -263,6 +284,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'A5',
+      numMesa:5,
       capacidad:6,
       estado : {
         connect:{
@@ -279,6 +301,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'A6',
+      numMesa:6,
       capacidad:4,
       estado : {
         connect:{
@@ -295,6 +318,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'H1',
+      numMesa:1,
       capacidad:6,
       estado : {
         connect:{
@@ -312,6 +336,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'H2',
+      numMesa:2,
       capacidad:4,
       estado : {
         connect:{
@@ -329,6 +354,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'H3',
+      numMesa:3,
       capacidad:6,
       estado : {
         connect:{
@@ -345,6 +371,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'H4',
+      numMesa:4,
       capacidad:4,
       estado : {
         connect:{
@@ -361,6 +388,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'H5',
+      numMesa:5,
       capacidad:6,
       estado : {
         connect:{
@@ -377,6 +405,7 @@ async function main() {
   await prisma.mesa.create({
     data: {
       codigo:'H6',
+      numMesa:6,
       capacidad:6,
       estado : {
         connect:{

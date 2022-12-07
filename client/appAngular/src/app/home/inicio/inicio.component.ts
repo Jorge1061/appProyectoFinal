@@ -57,10 +57,15 @@ export class InicioComponent implements OnInit {
   );
 }
 
-Siguiente(id: number){
+Siguiente(id: number,role){
   this.cartService.setRestaurante(id);
-  this.router.navigate(['platillo/']);
+  if(role=='USER')
+    this.router.navigate(['platillo/']);
+  else
+    this.router.navigate(['mesa/']);
 }
+
+
 
   getRoles() {
     this.gService

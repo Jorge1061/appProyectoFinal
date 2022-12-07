@@ -19,18 +19,23 @@ module.exports.get = async (request, response, next) => {
   response.json(mesas);
 };
 
-module.exports.getByIdRestaurante = async (request, response, next) => {
-  let id = parseInt(request.params.id);
-  const mesa = await prisma.mesa.findMany({
-    where: {
-      restauranteId: id,
+module.exports.getByRestaurante = async (request, response, next) => {
+  let idRestaurante = parseInt(request.params.idRestaurante);
+  const mesas = await prisma.mesa.findMany({
+    where:{restauranteId:idRestaurante},
+    orderBy: {
+      codigo: "asc",
     },
-    include:{
-      estado:true,
-      restaurante:true,
+    include: {
+      estado:{
+        select:{descripcion:true}
+      },
+      restaurante: {
+        select:{nombre:true}
+      }, 
     }
   });
-  response.json(mesa);
+  response.json(mesas);
 };
 
 module.exports.getById = async (request, response, next) => {
@@ -51,15 +56,38 @@ module.exports.getById = async (request, response, next) => {
 //Crear un mesa
 module.exports.create = async (request, response, next) => {
   let mesa = request.body;
+
+  const numMesa=(await prisma.mesa.findMany({
+    where:{restauranteId:mesa.restauranteId},
+    orderBy: {
+      codigo: "asc",
+    },
+    include: {
+      estado:{
+        select:{descripcion:true}
+      },
+      restaurante: {
+        select:{nombre:true}
+      }, 
+    }
+  })).length+1;
+
+  
   const newmesa = await prisma.mesa.create({
     data: {
-      codigo: mesa.codigo,
+      numMesa:numMesa,
+      codigo: (await prisma.restaurante.findUnique({
+        where:{id:mesa.restauranteId},
+        select:{
+          inicial:true
+        }
+      })).inicial+numMesa,
       capacidad: parseInt(mesa.capacidad),
       estado:{
         connect:
           await prisma.estadoMesas.findUnique({
             where: {
-              id: mesa.estadoId,
+              id: mesa.estadoId, 
             },
             select:
             {

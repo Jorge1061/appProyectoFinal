@@ -1,5 +1,5 @@
 <body>
-  <div class='container' *ngIf="isAutenticated && currentUser.user.role=='USER'">
+  <div class='container' >
 <form [formGroup]="formCreate" novalidate>
   <mat-card class="shipping-card">
     <mat-card-header>
@@ -11,9 +11,11 @@
           <mat-form-field class="full-width">
             <mat-label>Seleccione una sucursal</mat-label>
             <mat-select placeholder="Seleccione una sucursal" formControlName="role">
-              <mat-option *ngFor="let r of roles" [value]="r.id" (click)="Siguiente(r.id)">
+              <mat-option 
+               *ngFor="let r of roles" [value]="r.id" (click)="Siguiente(r.id,currentUser.user.role)">
                 {{ r.nombre }}
-              </mat-option>
+              </mat-option> 
+
             </mat-select>
           </mat-form-field>
         </div>

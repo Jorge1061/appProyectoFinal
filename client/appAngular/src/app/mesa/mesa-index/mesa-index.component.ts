@@ -6,6 +6,7 @@ import { GenericService } from 'src/app/share/generic.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 import { AuthenticationService } from 'src/app/share/authentication.service';
+import { CartService } from 'src/app/share/cart.service';
 
 @Component({
   selector: 'mesa-index',
@@ -26,6 +27,7 @@ export class MesaIndexComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private cartService:CartService,
     private authService: AuthenticationService,
     private breakpointObserver: BreakpointObserver,
     private gService: GenericService,
@@ -46,7 +48,7 @@ export class MesaIndexComponent {
   this.authService.isAuthenticated.subscribe(
     (valor) => (this.isAutenticated = valor)
   );
-    this.listaMesas(); this.listaRestaurante();
+    this.obtenerByRest(cartService.getRestaurante()); this.listaRestaurante();
   }
 
   listaMesas() {
@@ -69,13 +71,13 @@ export class MesaIndexComponent {
       });
   }
 
-  obtenerByRest(id:any) {
+  obtenerByRest(idRestaurante:any) {
     this.gService
-    .get('mesa/rest',id)
+    .get('mesa/rest',idRestaurante)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
        // console.log(data);
-        this.datos2 = data;
+        this.datos = data;
       });
   }
 
@@ -85,6 +87,14 @@ export class MesaIndexComponent {
       relativeTo: this.route,
     });
   }
+
+  gestionarMesa(numMesa,idMesa: number) {
+    this.cartService.setMesa(idMesa);
+    this.router.navigate(['/platillo'], {
+      relativeTo: this.route,
+    });
+  }
+
   onBack() {
     this.router.navigate(['/']);
   }
