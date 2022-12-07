@@ -9,10 +9,8 @@
               <h1 class="mat-p">
                   Control de mesas
               </h1>
-              <br>
-              <button  class="obtener" mat-raised-button  *ngIf="currentUser.user.role=='MESERO'"  (click)="obtenerByRest(currentUser.user.restauranteId)">Mostrar mesas</button>     
-              <br>
-        <mat-grid-list [cols]="3" rowHeight="12em" gutterSize="10px"  *ngIf="datos && currentUser.user.role=='ADMIN'" >
+
+        <mat-grid-list [cols]="3" rowHeight="12em" gutterSize="10px"  *ngIf="datos" >
             
             <mat-grid-tile *ngFor="let item of datos">
                 <mat-card class="dashboard-card">

@@ -61,6 +61,7 @@ export class AuthenticationService {
           localStorage.setItem('currentUser', JSON.stringify(user.data));
           this.authenticated.next(true);
           this.currentUserSubject.next(user.data);
+          this.cartService.setRestaurante(user.data.user.restauranteId);
           return user;
         })
       );

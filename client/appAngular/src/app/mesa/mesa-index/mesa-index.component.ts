@@ -72,6 +72,7 @@ export class MesaIndexComponent {
   }
 
   obtenerByRest(idRestaurante:any) {
+    
     this.gService
     .get('mesa/rest',idRestaurante)
       .pipe(takeUntil(this.destroy$))

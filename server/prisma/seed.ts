@@ -64,6 +64,20 @@ async function main() {
       }
     }
   });  
+  await prisma.usuario.create({
+    data: {
+      nombre:'Jostin22',
+      email:'jrodriguez@auraquantic.com',
+      password:'$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO',
+      direccion:'Coyol de Alajuela, 50mts sur de entrada calle la margarita',
+      role:'MESERO',
+      restaurante : {
+        connect:{
+          id:2
+        }
+      }
+    }
+  });  
 
 
 
