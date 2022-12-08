@@ -55,6 +55,19 @@
             </mat-error>
           </mat-form-field>
         </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Ingredientes" formControlName="ingrediente">
+              <mat-error *ngIf="platilloForm.controls['descripcion'].hasError('required')">
+                Los ingredienteses son <strong>requeridos</strong>
+              </mat-error>
+              <mat-error *ngIf="platilloForm.controls['descripcion'].hasError('pattern')">
+                Los ingredientes <strong>no pueden tener</strong> caracteres especiales
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>  
         <div class="col">
           <mat-form-field class="full-width">
             <input matInput placeholder="Precio" formControlName="precio">
@@ -97,20 +110,6 @@
         </div>
       </div>
       
-      <!-- <div class="row">
-        <div class="col" *ngIf="ingredientesList">
-          <mat-form-field class="full-width">
-            <mat-select placeholder="Ingredientes" formControlName="ingredientes" multiple>
-              <mat-option *ngFor="let g of ingredientesList" [value]="g.id">
-                {{ g.descripcion }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="platilloForm.controls['ingredientes'].hasError('required')">
-              Ingredientes es <strong>requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
-      </div> -->
       
 
         <div class="row-abajo">

@@ -20,7 +20,7 @@
       >Control de Mesas</a
     >
 
-    <a mat-button
+    <a mat-button *ngIf="currentUser.user.role != 'MESERO'"
     [routerLink]="['/platillo']" routerLinkActive="is-active"
       >Platillos</a
     >
@@ -40,7 +40,6 @@
     >
     <mat-menu #menu2="matMenu">
       <button
-        mat-menu-item
         [routerLink]="'/platillo/all'"
         [routerLinkActive]="'mat-raised-button'"
       >

@@ -54,7 +54,7 @@ model Platillo {
   estado      Boolean             @default(true)
   precio      Decimal             @db.Decimal(10, 2)
   createdAt   DateTime            @default(now())
-  ingredientes String
+  ingredientes String 
   pedidos     PedidoOnPlatillos[]
   restaurantes Restaurante[]
 }

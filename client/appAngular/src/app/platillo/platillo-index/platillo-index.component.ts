@@ -30,8 +30,7 @@ export class PlatilloIndexComponent implements AfterViewInit {
     private route: ActivatedRoute,
     private cartService:CartService,
     private gService:GenericService,
-    
-    private notificacion:NotificacionService
+    private noti: NotificacionService,
 
     
     ) {
@@ -74,7 +73,7 @@ export class PlatilloIndexComponent implements AfterViewInit {
     });
   }
   onBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/platillo']);
   }
   ngOnDestroy(){
     this.destroy$.next(true);
@@ -87,6 +86,11 @@ export class PlatilloIndexComponent implements AfterViewInit {
     .subscribe((data:any)=>{
       //Agregar videojuego obtenido del API al carrito
       this.cartService.addToCart(data);
+      this.noti.mensaje(
+        'Usuario',
+        'Producto añadido',
+        TipoMessage.success
+      );
       //Notificar al usuario
 
     });

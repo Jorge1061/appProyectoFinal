@@ -13,7 +13,6 @@ export class PlatilloFormComponent implements OnInit{
   titleForm:string='Crear';
   destroy$: Subject<boolean> = new Subject<boolean>();
   categoriasList:any;
-  ingredientesList:any;
   restaurantesList:any;
   platilloInfo:any;
   respPlatillo:any;
@@ -26,7 +25,6 @@ export class PlatilloFormComponent implements OnInit{
     private router: Router,private activeRouter: ActivatedRoute) {
       this.formularioReactive();
       this.listaCategorias();
-      this.listaIngredientes();
       this.listaRestaurantes();
     
   }
@@ -50,6 +48,7 @@ export class PlatilloFormComponent implements OnInit{
             categoriaId:this.platilloInfo.categoria.id,
             
             descripcion:this.platilloInfo.descripcion,
+            ingredientes:this.platilloInfo.ingredientes,
             restaurantes:this.platilloInfo.restaurantes.map(({id}) => id),
             
             //ingredientes:this.platilloInfo.ingredientes.map(({id}) => id),
@@ -73,6 +72,8 @@ export class PlatilloFormComponent implements OnInit{
       ])],
       descripcion:[null, Validators.compose([Validators.required, 
         Validators.minLength(10),Validators.maxLength(999),])],
+      ingredientes:[null, Validators.compose([Validators.required, 
+          Validators.minLength(10),])],
       precio: [null, Validators.compose([Validators.required, 
         Validators.pattern(/^-?(0|[1-9]\d*)?$/)])],
       publicar:[true, Validators.required],
@@ -89,17 +90,6 @@ export class PlatilloFormComponent implements OnInit{
       .subscribe((data: any) => {
         // console.log(data);
         this.categoriasList = data;
-      });
-  }
-  
-  listaIngredientes() {
-    this.ingredientesList = null;
-    this.gService
-      .list('ingrediente')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        // console.log(data);
-        this.ingredientesList = data;
       });
   }
   

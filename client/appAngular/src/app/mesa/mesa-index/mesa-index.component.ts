@@ -97,6 +97,6 @@ export class MesaIndexComponent {
   }
 
   onBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/mesa']);
   }
 }
